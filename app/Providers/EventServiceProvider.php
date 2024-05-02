@@ -6,11 +6,14 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Source\User\App\Events\UserCreatedEvent;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\Infrastructure\Listerners\UserCreatedEventListerner;
-use Source\User\Infrastructure\Listerners\UserCreatedReadEventListener;
-use Source\User\Infrastructure\Listerners\UserLogReadEventListerner;
+use Source\User\Domain\Events\UserCreatedLogEvent;
+use Source\User\Domain\Events\UserUpdatedLogEvent;
+use Source\User\Domain\Events\UserUpdatedReadEvent;
+use Source\User\Infrastructure\Listerners\UserCreatedLogEventListener;
+use Source\User\Infrastructure\Listerners\UserDuplicationReadEventListener;
+use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
+use Source\User\Infrastructure\Listerners\UserUpdateReadEventListerner;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,13 +26,19 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        UserCreatedEvent::class => [
-            UserCreatedEventListerner::class,
-          //  UserLogReadEventListerner::class
+        UserCreatedLogEvent::class => [
+            UserCreatedLogEventListener::class,
+           
         ],
 
         UserCreatedReadEvent::class => [
-            UserCreatedReadEventListener::class
+            UserDuplicationReadEventListener::class
+        ],
+        UserUpdatedLogEvent::class => [
+            UserUpdateLogEventListerner::class
+        ],
+        UserUpdatedReadEvent::class => [
+            UserUpdateReadEventListerner::class
         ]
         
     ];

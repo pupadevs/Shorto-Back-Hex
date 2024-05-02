@@ -21,11 +21,7 @@ class User
 
     private UserID $id;
 
-    protected function getDefaultGuardName(): string
-    {
-        return 'web';
-    }
-
+  
     public function __construct(UserID $id, Name $name, Email $email, Password $password)
     {
 
@@ -85,8 +81,13 @@ class User
         $this->password = $password;
     }
 
-    public function changeEmail(Email $email)
+    public function changeEmail(Email $email):void
     {
         $this->email = $email;
+    }
+
+    public function changeName(Name $name):void{
+
+        $this->name = $name;
     }
 }

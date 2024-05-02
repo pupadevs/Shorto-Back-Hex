@@ -1,10 +1,11 @@
 <?php
-namespace Source\User\App\Events;
+declare(strict_types=1);
+namespace Source\User\Domain\Events;
 
-use Source\Shared\Event\Event;
-use Source\User\Domain\ValueObjects\UserID;
+use Ramsey\Uuid\Uuid;
 
-class UserCreatedEvent  
+
+class UserCreatedLogEvent 
 {
    
     private $userId;
@@ -15,18 +16,26 @@ class UserCreatedEvent
 
     private string $ip;
 
+    private string $id;
+
+    private string $eventHandler;
+
 
     public function __construct(string $userId )
     {
        // parent::__construct($userId, $action, $ip, $eventType = $this->getEventType());
    
-    
-
+        
+       $this->id = Uuid::uuid4()->toString();
         $this->userId = $userId;
 
         $this->action = 'User created';
 
-        $this->ip = $_SERVER['REMOTE_ADDR'];
+       $this->ip = "127.0.0.1";
+
+        $this->eventType = self::class;
+
+
 
 
     }
@@ -39,12 +48,24 @@ class UserCreatedEvent
         return $this->eventType;
     }
 
+    public function getEventHandler(){
+
+        return $this->eventHandler;
+    }
+
     public function getAction(){
         return $this->action;
 
     }
 
+    public function setIp(string $ip){
+        
+        $this->ip = $ip;
+    }
 
+/* public function getId(){
+    return $this->id;
+} */
     public function getIp(){
         return $this->ip;
     }

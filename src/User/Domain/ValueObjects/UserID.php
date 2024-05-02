@@ -15,8 +15,11 @@ class UserID implements StringValueObject
 
         if ($userID === null) {
             $this->userID = Uuid::uuid4()->toString();
+        }else{
+
+            $this->userID = $userID;
         }
-        $this->userID = Uuid::uuid4()->toString();
+      //  $this->userID = $userID;
     }
 
     public function toString(): string

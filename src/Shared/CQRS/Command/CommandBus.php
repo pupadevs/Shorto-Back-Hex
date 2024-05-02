@@ -18,13 +18,13 @@ class CommandBus
     //
     public function execute(Command $command)
     {
-        $handlerClass = $this->resolveListenerClass($command);
+        $handlerClass = $this->resolveHandlerClass($command);
         $handler = $this->container->make($handlerClass);
 
         return $handler->execute($command);
     }
 
-    protected function resolveListenerClass(Command $command)
+    protected function resolveHandlerClass(Command $command)
     {
   
         return get_class($command).'Handler';

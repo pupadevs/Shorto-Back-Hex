@@ -13,13 +13,12 @@ interface UserRepositoryInterface
 {
     public function insertUser(User $user);
 
-    public function getUserById(UserID $userID): User;
+   public function findbyId(UserID $id);
 
-    public function getUserByEmail(Email $email): User;
+    public function findByEmail(Email $email);
 
     public function save(User $user);
 
     public function deleteUser(User $user);
 
-    public function emailExists(Email $email): bool;
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Source\Shared\CQRS\Event;
+namespace Source\Shared\Event;
 
 use Illuminate\Contracts\Container\Container;
 use Source\Shared\Event\Event;
-
+use Source\Shared\Event\EventInterface;
 
 class EventBus
 {
@@ -18,7 +18,7 @@ class EventBus
     }
 
     //
-    public function dispatch( $event)
+    public function dispatch(EventInterface $event)
     {
         $handlerClass = $this->resolveHandlerClass($event);
         $handler = $this->container->make($handlerClass);
@@ -26,9 +26,9 @@ class EventBus
         return $handler->execute($event);
     }
 
-    protected function resolveHandlerClass( $event)
+    protected function resolveHandlerClass(EventInterface $event)
     {
   
-        return get_class($event).'Listerner';
+        return get_class($event).'Listener';
     }
 }

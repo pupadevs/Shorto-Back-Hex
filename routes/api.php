@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Source\User\Infrastructure\Controllers\FindUserByIdController;
 use Source\User\Infrastructure\Controllers\RegisterUserController;
 use Source\User\Infrastructure\Controllers\TestController;
+use Source\User\Infrastructure\Controllers\UpdateUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +21,7 @@ use Source\User\Infrastructure\Controllers\TestController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/register', RegisterUserController::class)->name('register');    
+Route::post('/register', RegisterUserController::class)->name('register');   
+Route::get('/show/{uuid}', FindUserByIdController::class); 
+Route::put('/user/update/{uuid}', UpdateUserController::class);
 

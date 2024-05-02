@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Source\User\App\Querys;
 
 
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
+use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
 
 class CheckEmailQueryHandler{
 
-    private UserRepositoryInterface $userRepositoryInterface;
+    private UserReadRepositoryInterface $userReadRepository;
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface)
+    public function __construct(UserReadRepositoryInterface $userRepositoryInterface)
     {
-        $this->userRepositoryInterface = $userRepositoryInterface;
+        $this->userReadRepository = $userRepositoryInterface;
     }
 
-    public function handle(CheckEmailQuery $query){
-        return $this->userRepositoryInterface->emailExists(new Email($query->getEmail()));
+    public function handle(CheckEmailQuery $query): bool{
+        return $this->userReadRepository->emailExists(new Email($query->getEmail()));
     }
 }

@@ -11,18 +11,16 @@ use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 
 class FindUserByEmailController
 {
-    private FindUserByEmailService $findUserService;
 
-    public function __construct(FindUserByEmailService $findUserService)
+    public function __construct()
     {
 
-        $this->findUserService = $findUserService;
     }
 
     public function __invoke(Request $request)
     {
         try {
-            $user = $this->findUserService->execute($request->email);
+            $user= '';
 
             return response()->json(['user' => $user], 200);
         } catch (UserNotFoundException $userNotFoundException) {

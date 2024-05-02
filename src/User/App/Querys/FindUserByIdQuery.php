@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Source\User\App\Querys;
 
-class ShowUserQuery
+use Source\Shared\CQRS\Querys\Query;
+
+class FindUserByIdQuery implements Query
 {
     private string $userID;
 
@@ -17,5 +19,5 @@ class ShowUserQuery
     public function getUserId()
     {
         return $this->userID;
-    }
+    }   
 }

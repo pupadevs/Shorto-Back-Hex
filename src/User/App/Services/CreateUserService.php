@@ -34,6 +34,8 @@ class CreateUserService
         if($name == null || $email == null || $password == null) {
             throw new \InvalidArgumentException('Name, email and password are required',400);
         }
+
+ 
         
             $this->query->handle(new CheckEmailQuery($email));
         $this->command->execute(new UserCreateCommand($name, $email, $password));

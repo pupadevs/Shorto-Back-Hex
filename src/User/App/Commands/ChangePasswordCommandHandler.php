@@ -4,33 +4,30 @@ declare(strict_types=1);
 
 namespace Source\User\App\Commands;
 
-use Source\User\Domain\Interfaces\EloquentMysqlInterfaceRepository;
+use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\Password;
-use Source\User\Infrastructure\Events\UserCreatedEvent;
 
 class ChangePasswordCommandHandler
 {
     private UserRepositoryInterface $userRepositoryInterface;
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface)
+    private UserReadRepositoryInterface $userReadRepositoryInterface;
+
+    public function __construct(UserRepositoryInterface $userRepositoryInterface, UserReadRepositoryInterface $userReadRepositoryInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
+        $this->userReadRepositoryInterface = $userReadRepositoryInterface;
     }
 
     public function execute(ChangePasswordCommand $command)
     {
 
-        $user = $this->userRepositoryInterface->getUserByEmail(new Email($command->getEmail()));
+        $user = $this->userReadRepositoryInterface->getUserByEmail(new Email($command->getEmail()));
 
-        $user->changePassword(new Password($command->getNewPassword()));
+        $user->changePassword(new Password($command->getOldPassword()));
         $this->userRepositoryInterface->save($user);
-      //  event(new \Source\User\Domain\Events\UserCreatedEvent($user->getId()->toString()));
-      
-
-       // return false;
-
-        // $this->eloquentMysqlInterfaceRepository->save($command);
+     
     }
 }

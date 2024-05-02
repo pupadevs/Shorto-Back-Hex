@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Controllers;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Source\Shared\CQRS\Command\CommandBus;
-use Source\User\App\Commands\UserCreateCommand;
 use Source\User\App\Services\CreateUserService;
+use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
 
 class RegisterUserController
 {
@@ -23,7 +24,7 @@ class RegisterUserController
         $this->commandBus = $commandBus;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
          try {
             $data = $request->all();
@@ -35,7 +36,7 @@ class RegisterUserController
             
             throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
         }
-        catch (\Exception $exception) {
+        catch (EmailExistsException $exception) {
 
             throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
         }  
