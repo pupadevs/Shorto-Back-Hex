@@ -10,14 +10,25 @@ use Source\User\Domain\ValueObjects\Email;
 
 class CheckEmailQueryHandler{
 
+    /**
+     * @var UserReadRepositoryInterface $userReadRepository
+     */
     private UserReadRepositoryInterface $userReadRepository;
-
+/**
+ * QueryHandler constructor.
+ * @param UserReadRepositoryInterface $userRepositoryInterface
+ */
     public function __construct(UserReadRepositoryInterface $userRepositoryInterface)
     {
         $this->userReadRepository = $userRepositoryInterface;
     }
-
+/**
+ * Method to execute query
+ * @param CheckEmailQuery $query
+ * @return bool
+ */
     public function handle(CheckEmailQuery $query): bool{
-        return $this->userReadRepository->emailExists(new Email($query->getEmail()));
+        $emailExists = $this->userReadRepository->emailExists($query->getEmail());
+        return $emailExists;
     }
 }

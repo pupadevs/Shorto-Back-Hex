@@ -8,23 +8,41 @@ use Source\Shared\CQRS\Querys\Query;
 
 class CheckPasswordQuery implements Query
 {
-    private string $email;
-
-    private string $password;
-
-    public function __construct(string $email, string $password)
+    /**
+     * Email of user
+     * @var string
+     */
+    private string $passwordDb;
+    /**
+     * Password of user
+     * @var string
+     */
+    private string $passwordRequest;
+    /**
+     * Query constructor.
+     * @param string $email, string $password
+     */
+    public function __construct(string $passwordDb, string $passwordRequest)
     {
-        $this->email = $email;
-        $this->password = $password;
+        $this->passwordDb = $passwordDb;
+        $this->passwordRequest = $passwordRequest;
     }
-
-    public function getEmail()
+/**
+ * Method to get email
+ * @return string
+ */
+    public function getPasswordDb()
     {
-        return $this->email;
+     
+        return $this->passwordDb;
     }
-
-    public function getPassword()
+    /**
+     * Method to get password
+     * @return string
+     */
+    public function getPasswordRequest()
     {
-        return password_hash($this->password, PASSWORD_DEFAULT);
+      
+        return $this->passwordRequest;
     }
 }

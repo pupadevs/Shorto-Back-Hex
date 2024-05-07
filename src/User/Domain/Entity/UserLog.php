@@ -11,20 +11,49 @@ use Source\User\Domain\ValueObjects\UserLog\UserLogID;
 
 class UserLog
 {
-    private  $id;
-
+    /**
+     * UserLog ID
+     * @var UserLogID $userLogID
+     */
+    private UserLogID $userLogID;
+/**
+ * Action of user
+ * @var string $action
+ */
     private string $action;
-
+    /**
+     * IP of user
+     * @var string $ip
+     */
     private string $ip;
-
+/**
+ * User ID
+ * @var UserID $userId
+ */
     private UserID $userId;
-
+/**
+ * Event type
+ * @var string $eventType
+ */
 private string $eventType;
+/**
+ * Event handler
+ * @var string $eventHandler
+ */
 private string $eventHandler;
+/**
+ * UserLog constructor.
+ * @param UserLogID $userLogID
+ * @param string $action
+ * @param string $ip
+ * @param UserID $userId
+ * @param string $eventType
+ * @param string $eventHandler
 
-public function __construct(UserLogID   $id, string $action, string $ip, UserID $userId, string $eventType, string $eventHandler)
+ */
+public function __construct(UserLogID $id, string $action, string $ip, UserID $userId, string $eventType, string $eventHandler)
 {
-  $this->id = $id;
+  $this->userLogID = $id;
     $this->action = $action;
     $this->ip = $ip;
     $this->userId = $userId;
@@ -50,7 +79,7 @@ public static function createUserLog( string $action, string $ip, UserID $userId
      */
     public function getId()
     {
-        return $this->id;
+        return $this->userLogID;
     }
 
 

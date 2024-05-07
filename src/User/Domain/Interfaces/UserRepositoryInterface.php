@@ -11,14 +11,24 @@ use Source\User\Domain\ValueObjects\UserID;
 
 interface UserRepositoryInterface
 {
-    public function insertUser(User $user);
+    /**
+     * Method to insert user
+     * @param User $user
+     * @return bool
+     */
+    public function insertUser(User $user):bool;
 
-   public function findbyId(UserID $id);
-
-    public function findByEmail(Email $email);
-
+/**
+ * Method to save user
+ * @param User $user
+ * @return void
+ */
     public function save(User $user);
-
-    public function deleteUser(User $user);
+/**
+ * Method to delete user
+ * @param User $user
+ * @return bool
+ */
+    public function deleteUser(User $user):bool;
 
 }

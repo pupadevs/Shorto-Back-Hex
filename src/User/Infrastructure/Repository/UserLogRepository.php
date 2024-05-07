@@ -14,6 +14,10 @@ use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
 
 class UserLogRepository implements UserLogRepositoryInterface
 {
+  /**
+   * save a new user in the database Write
+   * @param UserLog $event
+   */
     public function insertLogUserCreation(UserLog $event)
     {
        $user=   DB::connection('mysql')->table('users_logs')->insert([
@@ -27,7 +31,10 @@ class UserLogRepository implements UserLogRepositoryInterface
       ]);
      
     }
-
+    /**
+     *  save a new user in the database Write
+     * @param UserLog $event
+     */
     public function insertLogUserUpdate(UserLog $event){
 
          DB::connection('mysql')->table('users_logs')->insert([

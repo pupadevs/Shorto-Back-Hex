@@ -6,8 +6,15 @@ namespace Source\User\Domain\ValueObjects;
 
 class Password implements StringValueObject
 {
+    /**
+     * Password
+     * @var string
+     */
     private string $password;
-
+/**
+ * Password constructor.
+ * @param string|null $password
+ */
     public function __construct(?string $password = null)
     {
      
@@ -27,6 +34,11 @@ class Password implements StringValueObject
         return $this->password;
     }
 
+    /**
+     * Verify password and throw exception if invalid or null
+     * @param string|null $password
+     * @throws \Exception
+     */
     private function verifyPassword(?string $password)
     {
         if ($password === null || strlen($password) < 8) {

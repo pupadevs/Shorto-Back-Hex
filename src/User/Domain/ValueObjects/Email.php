@@ -6,7 +6,18 @@ namespace Source\User\Domain\ValueObjects;
 
 class Email implements StringValueObject
 {
+    /**
+     * Email
+     * @var string
+     */
     private $email;
+
+    /**
+     * Email constructor.
+     * @param string|null $email
+     * @throws \InvalidArgumentException
+     * 
+     */
 
     public function __construct(?string $email = null)
     {
@@ -16,13 +27,20 @@ class Email implements StringValueObject
  
         $this->email = $email;
     }
-
+/**
+ * Method to get email
+ * @return string
+ * 
+ */
     public function ToString(): string
     {
 
         return (string) $this;
     }
-
+/**
+ * Method to get email
+ * @return string
+ */
     public function __toString(): string
     {
         return $this->email;

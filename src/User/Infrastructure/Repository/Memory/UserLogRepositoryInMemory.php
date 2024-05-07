@@ -13,8 +13,15 @@ use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
 
 class UserLogRepositoryInMemory implements UserLogRepositoryInterface
 {
+    /**
+     * @var array
+     */
     private array $logs = [];
-
+    /**
+     * Method to insert user log
+     * @param UserLog $event
+     * @return void
+     */
     public function insertLogUserCreation(UserLog $event): void
     {
         $this->logs[] = [
@@ -27,7 +34,11 @@ class UserLogRepositoryInMemory implements UserLogRepositoryInterface
             'event_handler' => UserCreatedLogEventListener::class,
         ];
     }
-
+    /**
+     * Method to insert user log
+     * @param UserLog $event
+     * @return void
+     */
     public function insertLogUserUpdate(UserLog $event): void
     {
         $this->logs[] = [
@@ -42,6 +53,10 @@ class UserLogRepositoryInMemory implements UserLogRepositoryInterface
     }
 
     // Opcional: Agregar un método para obtener todos los logs guardados en memoria
+    /**
+     * Method to get all user logs
+     * @return array
+     */
     public function getLogs(): array
     {
         return $this->logs;

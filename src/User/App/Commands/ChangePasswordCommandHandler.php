@@ -11,16 +11,34 @@ use Source\User\Domain\ValueObjects\Password;
 
 class ChangePasswordCommandHandler
 {
+    /**
+     * @var UserRepositoryInterface $userRepositoryInterface
+     */
     private UserRepositoryInterface $userRepositoryInterface;
 
+    /**
+     * @var UserReadRepositoryInterface $userReadRepositoryInterface
+     */
     private UserReadRepositoryInterface $userReadRepositoryInterface;
 
+    /**
+     * CommandHandler constructor.
+     * @param UserRepositoryInterface $userRepositoryInterface
+     * @param UserReadRepositoryInterface $userReadRepositoryInterface
+     */
     public function __construct(UserRepositoryInterface $userRepositoryInterface, UserReadRepositoryInterface $userReadRepositoryInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->userReadRepositoryInterface = $userReadRepositoryInterface;
     }
 
+    /**
+     * Method to execute command
+     * @param ChangePasswordCommand $command
+     * @return void
+     */
+
+     
     public function execute(ChangePasswordCommand $command)
     {
 

@@ -14,7 +14,7 @@ class UserUpdatedLogEvent
 
     private string $action;
 
-    private string $ip;
+    private string $ip = '127.0.0.1';
 
     private string $id;
 

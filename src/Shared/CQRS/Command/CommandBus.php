@@ -8,14 +8,28 @@ use Illuminate\Contracts\Container\Container;
 
 class CommandBus
 {
-    protected $container;
+    /**
+     * Container instance
+     * @param Container $container
+     */
+    protected Container $container;
 
+    /**
+     *  CommandBus constructor.
+     * CommandBus constructor.
+     * @param Container $container
+     */
     public function __construct(Container $container)
     {
         $this->container = $container;
     }
 
-    //
+    /**
+     * Method to execute command
+     * @param Command $command
+     * @return mixed
+     */
+
     public function execute(Command $command)
     {
         $handlerClass = $this->resolveHandlerClass($command);
@@ -23,6 +37,13 @@ class CommandBus
 
         return $handler->execute($command);
     }
+
+    /**
+     * Method to resolve handler class based on command
+     * @param Command $command
+     * 
+     * @return string
+     */
 
     protected function resolveHandlerClass(Command $command)
     {

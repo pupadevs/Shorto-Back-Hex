@@ -13,16 +13,35 @@ use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
 
 class RegisterUserController
 {
+    /**
+     * @var CreateUserService $createUserService
+     */
     private CreateUserService $createUserService;
 
+    /**
+     * @var CommandBus $commandBus
+     */
     private CommandBus $commandBus;
-
+/**
+ * RegisterUserController constructor.
+ * @param CreateUserService $createUserService
+ * @param CommandBus $commandBus
+ */
     public function __construct(CreateUserService $createUserService, CommandBus $commandBus)
     {
         $this->createUserService = $createUserService;
 
         $this->commandBus = $commandBus;
     }
+
+    /**
+     * Method to create user 
+     * @param Request $request
+     * @throws HttpResponseException
+     * @throws EmailExistsException
+     * @throws \InvalidArgumentException
+     * @return JsonResponse
+     */
 
     public function __invoke(Request $request): JsonResponse
     {
@@ -39,12 +58,8 @@ class RegisterUserController
         catch (EmailExistsException $exception) {
 
             throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
-        }  
-/* 
-         $this->commandBus->execute(new UserCreateCommand($request->name, $request->email, $request->password));
-        return response()->json(['message' => 'User created successfully'], 201); */
+        } 
  
-
 
     }
 }

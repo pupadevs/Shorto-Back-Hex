@@ -11,12 +11,27 @@ use Source\User\Domain\Events\UserUpdatedLogEvent;
 interface UserLogReadRepositoryInterface
 {
 
-    public function getUserLogs();
+    /**
+     * Method to get all user logs
+     * @return array
+     */
 
+    public function getUserLogs():array;
+/**
+ * Method to insert user log
+ * @param UserLog $event
+ */
     public function insertUserLog(UserLog $event);
-    
+    /**
+     * Method to log user created
+     * @param UserCreatedLogEvent $event
+     */
     public function logUserUpdate(UserUpdatedLogEvent $event);
-
+/**
+ * Method to get user log by action
+ * @param string $action
+ * @return array
+ */
     public function getLogByAction(string $action);
 
 

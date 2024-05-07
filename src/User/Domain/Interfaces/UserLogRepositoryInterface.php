@@ -10,8 +10,15 @@ use Source\User\Domain\Events\UserUpdatedLogEvent;
 
 interface UserLogRepositoryInterface{
 
+    /**
+     * Method to insert user log
+     * @param UserLog $event
+     */
     public function insertLogUserCreation(UserLog $event);
-
+/**
+ * Method to insert user log
+ * @param UserLog $event
+ */
     public function insertLogUserUpdate(UserLog $event);
 
 

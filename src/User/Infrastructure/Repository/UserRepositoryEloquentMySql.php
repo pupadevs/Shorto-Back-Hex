@@ -7,77 +7,73 @@ namespace Source\User\Infrastructure\Repository;
 use Illuminate\Support\Facades\DB;
 use Source\User\Domain\Entity\User;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\UserID;
-use Source\User\Infrastructure\Repository\Eloquent\UserEloquentModel;
-use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
+use Source\User\Infrastructure\Repository\Exception\TransactionErrorException;
 
 class UserRepositoryEloquentMySql implements UserRepositoryInterface
 {
-    
+    /**
+     * save a new user in the database Write
+     * @param User $user
+     * @return bool
+     * @throws TransactionErrorException
+     */
 
-    public function insertUser(User $user)
-    {
-        $transaction = DB::transaction(function () use ($user) {
-          $user=  DB::connection('mysql')->table('users')->insert([
-                'id' => $user->getId()->toString(), 
-                'name' => $user->getName()->toString(),
-                'email' => $user->getEmail()->toString(),
-                'password' => $user->getPassword()->toString(),
-                'created_at' => date('Y-m-d H:i:s'),
-            ]); 
+    public function insertUser(User $user): bool
+{
+    $result = false;
 
-            return $user;
-          
-        });
-        if (!$transaction) {
+    DB::transaction(function () use ($user, &$result) {
+        $result = DB::connection('mysql')->table('users')->insert([
+            'id' => $user->getId()->toString(), 
+            'name' => $user->getName()->toString(),
+            'email' => $user->getEmail()->toString(),
+            'password' => $user->getPassword()->toString(),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]); 
+    });
 
-           // throw new TransactionError();   
-        }
-
-   
+    if (!$result) {
+        throw new TransactionErrorException();
     }
+
+    return $result; // Devuelve true si la inserción fue exitosa, false si falló
+}
+
+/**
+ * save a new user in the database Write
+ * @param User $user
+ * @return void
+ */
 
     public function save(User $user)
     {
+        $result = false;
         $data= [
             'name' => $user->getName()->toString(),
             'email' => $user->getEmail()->toString(),
         ];
-        //metodo save con DB::
-        DB::connection('mysql')->table('users')->where('id', $user->getId()->toString())->update($data);
-        
-      //  $saved = $this->userEloquentModel->save(get_object_vars($user));
+      $result =  DB::transaction(function () use ($user, $data) {
+            DB::connection('mysql')->table('users')->where('id', $user->getId()->toString())->update($data);
+        });
+
+       /*  if (!$result) {
+            throw new TransactionErrorException();
+        } */
+       
 
     }
 
-    public function findbyId(UserID $userID): User
-    {
+    /**
+     * delete user in the database Write
+     * @param User $user
+     * @return bool
+     */
 
-        $user = DB::connection('mysql')->table('users')->where('id', $userID)->first();
-        if (! $user) {
-            throw new UserNotFoundException();
-        }
-        $data = json_decode(json_encode($user), true);
-        return User::fromArray($data);
-    }
-
-    public function findByEmail(Email $email)
-    {
-
-        $user = DB::connection('mysql')->table('users')->where('email', $email)->first();
-        if (! $user) {
-            throw new UserNotFoundException();
-        }
-        $data = json_decode(json_encode($user), true);
-        return User::fromArray($data);
-    }
-
-    public function deleteUser(User $user)
+   public function deleteUser(User $user): bool
     {
 
         $user = DB::connection('mysql')->table('users')->where('id', $user->getId()->toString())->delete();
-    }
 
-   
+        return true;
+    }
 }

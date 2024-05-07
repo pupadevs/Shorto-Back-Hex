@@ -9,8 +9,16 @@ use Source\Shared\StringValueObject\StringValueObject;
 
 class Identifier implements StringValueObject
 {
+    /**
+     * @var string
+     * 
+     */
     private string $identifier;
-
+    /**
+     * Identifier constructor.
+     * @param string|null $identifier
+     * 
+     */
     public function __construct(string $identifier = null)
     {
         if ($identifier === null) {
@@ -21,6 +29,10 @@ class Identifier implements StringValueObject
         }
     }
 
+    /**
+     * Method to convert identifier to string
+     * @return string
+     */
     public function toString(): string
     {
         return (string)$this;
