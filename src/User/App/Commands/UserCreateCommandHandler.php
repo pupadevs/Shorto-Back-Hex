@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Source\User\App\Commands;
 
+use App\Mail\RegisterNotification;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Source\User\App\Commands\UserCreateCommand;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
@@ -34,7 +36,6 @@ class UserCreateCommandHandler
      * Method to execute command
      * @param UserCreateCommand $command
      * @return void
-     * @throws \Exception
      * 
      */
     public function execute(UserCreateCommand $command)
@@ -46,13 +47,9 @@ class UserCreateCommandHandler
         new Password($command->getPassword())
     );
 
-    try {
-        $this->userRepositoryInterface->insertUser($user);
-    } catch (\Exception $e) {
-        throw new \Exception("Error al insertar usuario en la base de datos: " . $e->getMessage());
-    }
 
-    event(new UserCreatedReadEvent($user));
+        $this->userRepositoryInterface->insertUser($user);
+        event(new UserCreatedReadEvent($user));
     event(new UserCreatedLogEvent($user->getId()->toString()));
 }
 }

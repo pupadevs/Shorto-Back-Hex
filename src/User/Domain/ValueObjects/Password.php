@@ -42,7 +42,7 @@ class Password implements StringValueObject
     private function verifyPassword(?string $password)
     {
         if ($password === null || strlen($password) < 8) {
-            throw new \Exception('Password must be at least 8 characters long', 400);
+            throw new \InvalidArgumentException('Password must be at least 8 characters long', 400);
         }
     }
 }

@@ -11,18 +11,18 @@ class CheckPasswordQueryHandler
     /**
      * Method to check password
      * @param CheckPasswordQuery $query
-     * @throws HttpResponseException
+     * @throws \InvalidArgumentException
      * @return bool 
      */
     public function handle(CheckPasswordQuery $query): bool
     {
-        $password = password_verify($query->getPasswordRequest(), $query->getPasswordDb());
+        $password = password_verify($query->getPasswordRequest()->toString(), $query->getPasswordDb());
     
         if ($password) {
         return $password;
 
         }
-            throw new HttpResponseException(response()->json(['message' => 'Invalid password'], 401));
+            throw new \InvalidArgumentException('Invalid password', 400);
 
         
 

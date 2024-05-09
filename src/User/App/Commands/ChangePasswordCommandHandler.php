@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Source\User\App\Commands;
 
+use Source\User\Domain\Events\ChangePasswordLogEvent;
+use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
@@ -41,11 +43,12 @@ class ChangePasswordCommandHandler
      
     public function execute(ChangePasswordCommand $command)
     {
-
-        $user = $this->userReadRepositoryInterface->getUserByEmail(new Email($command->getEmail()));
-
-        $user->changePassword(new Password($command->getOldPassword()));
+        
+       $user = $command->getUser();
+        $user->changePassword(new Password($command->getNewPassword()));
         $this->userRepositoryInterface->save($user);
-     
+       event(new ChangePasswordReadEvent($user));
+
+        event(new ChangePasswordLogEvent($user->getId()->toString()));
     }
 }

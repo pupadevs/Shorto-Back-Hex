@@ -6,6 +6,7 @@ namespace Source\User\Domain\Interfaces;
 
 //use Source\User\Domain\Entity\User;
 use Source\User\Domain\Entity\User;
+use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\UserID;
 
@@ -24,6 +25,8 @@ interface UserRepositoryInterface
  * @return void
  */
     public function save(User $user);
+    public function changePassword(ChangePasswordReadEvent $event): void;
+
 /**
  * Method to delete user
  * @param User $user

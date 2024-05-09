@@ -47,9 +47,9 @@ class UserUpdateLogEventListerner  implements ShouldQueue
         $userLogEvent=  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),UserCreatedLogEventListener::class);
       
        
-        $this->userLogRepository->insertLogUserUpdate($userLogEvent);
+        $this->userLogRepository->save($userLogEvent);
 
-        $this->userReadRepository->logUserUpdate($event);
+        $this->userReadRepository->save($userLogEvent);
 
 
       

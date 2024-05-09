@@ -8,32 +8,49 @@ use Source\Shared\CQRS\Command\CommandBus;
 use Source\Shared\CQRS\Querys\QueryBus;
 use Source\User\App\Commands\ChangePasswordCommand;
 use Source\User\App\Querys\CheckPasswordQuery;
+use Source\User\App\Querys\FindUserByIdQuery;
 use Source\User\App\Services\Contracts\ChangePasswordInterface;
+use Source\User\Domain\ValueObjects\Password;
 
 class ChangePasswordService implements ChangePasswordInterface
 {
-    private $commandBus;
-
-    private $queryBus;
-
+    /**
+     * @var CommandBus $command
+     */
+    private CommandBus $commandBus;
+    /**
+     * @var QueryBus $query
+     */
+    private QueryBus $queryBus;
+/** 
+ * ChangePasswordService constructor.
+ * @param CommandBus $commandBus
+ * @param QueryBus $queryBus
+ */
     public function __construct(CommandBus $commandBus, QueryBus $queryBus)
     {
         $this->commandBus = $commandBus;
 
         $this->queryBus = $queryBus;
     }
-
-    public function execute(?string $email = null, ?string $password_old = null, ?string $new_password = null)
+/**
+ * Method to change password
+ * @param string|null $password_old,
+ * @param string|null $new_password, 
+ * @param string|null $uuid
+ */
+    public function execute( ?string $password_old = null, ?string $new_password = null, ?string $uuid = null)
     {
-        $this->queryBus->handle(new CheckPasswordQuery( $password_old, $new_password));
+      $user=   $this->queryBus->handle(new FindUserByIdQuery( $uuid));
 
-        $this->commandBus->execute(new ChangePasswordCommand($email, $password_old, $new_password));
+      
+        $this->queryBus->handle(new CheckPasswordQuery( $user->getPassword()->toString(), new Password($password_old)));
+
+        $this->commandBus->execute(new ChangePasswordCommand($user, new Password($new_password)));
 
 
         
-        // $user->changePassword($password->toString());
-
-        //  $this->eloquentUserInterface->save($user);
+   
 
     }
 }

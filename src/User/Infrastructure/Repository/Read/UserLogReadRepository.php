@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Repository\Read;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Source\User\Domain\Entity\UserLog;
@@ -72,5 +73,18 @@ class UserLogReadRepository implements UserLogReadRepositoryInterface
         return DB::connection('mysql_read')->table('users_logs')->where('action', $action)->get();
     }
 
+    public function save(UserLog $event)
+    {
+
+        DB::connection('mysql_read')->table('users_logs')->insert([
+          'id' => $event->getId(),
+            'user_id' => $event->getUserID(),
+            'action' => $event->getAction(),
+            'event_type' => $event->getEventType(),
+            'created_at' => Carbon::now(),
+            'ip' => $event->getIp(),
+            'event_handler' => $event->getEventHandler()
+        ]);
+    }
 
 }

@@ -7,6 +7,7 @@ namespace Source\User\Infrastructure\Repository\Read;
 use Illuminate\Support\Facades\DB;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
+use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\Events\UserUpdatedReadEvent;
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
@@ -41,23 +42,37 @@ class UserReadRepository implements UserReadRepositoryInterface{
 
     public function save(UserUpdatedReadEvent $user): void
     {
+        var_dump($user->getUser()->getPassword()->ToString());
         $data= [
             'name' => $user->getUser()->getName()->toString(),
             'email' => $user->getUser()->getEmail()->toString(),
+            'password' => $user->getUser()->getPassword()->ToString(),
         ];
         DB::connection('mysql_read')->table('users')->where('id', $user->getUser()->getId()->toString())->update($data);
     }
 
-    /**
+  
+
+     public function changePassword(ChangePasswordReadEvent $event): void
+     {
+        var_dump($event->getUser()->getPassword()->ToString());
+
+        $data= [
+           
+            'password' => $event->getUser()->getPassword()->ToString(),
+        ];
+        DB::connection('mysql_read')->table('users')->where('id', $event->getUser()->getId()->toString())->update($data);
+     }
+   /**
      * get user by id from database read
      * @param UserID $userID
      * @return User
      * @throws UserNotFoundException
      */
- 
     public function getUserByID(UserID $userID): User
     { 
       $user = DB::connection('mysql_read')->table('users')->where('id', $userID)->first();
+      
     
         if (! $user) {
             throw new UserNotFoundException();

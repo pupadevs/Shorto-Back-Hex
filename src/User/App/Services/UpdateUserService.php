@@ -16,6 +16,7 @@ use Source\User\Domain\Events\UserUpdatedReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\Name;
+use Source\User\Domain\ValueObjects\Password;
 
 class UpdateUserService 
 {
@@ -62,7 +63,7 @@ class UpdateUserService
         $this->queryBus->handle(new CheckEmailQuery(new Email($email)));
                 $user->changeEmail(new Email ($email));
                 $user->changeName(new Name($name)); 
-        $this->queryBus->handle(new CheckPasswordQuery($user->getPassword()->toString(), $password));
+        $this->queryBus->handle(new CheckPasswordQuery($user->getPassword()->toString(),new Password($password)));
 
    $this->eloquentUserInterface->save($user);
    event(new UserUpdatedReadEvent($user));

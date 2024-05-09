@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Source\User\App\Querys;
 
 use Source\Shared\CQRS\Querys\Query;
+use Source\User\Domain\ValueObjects\Password;
 
 class CheckPasswordQuery implements Query
 {
@@ -15,14 +16,14 @@ class CheckPasswordQuery implements Query
     private string $passwordDb;
     /**
      * Password of user
-     * @var string
+     * @var Password
      */
-    private string $passwordRequest;
+    private Password $passwordRequest;
     /**
      * Query constructor.
      * @param string $email, string $password
      */
-    public function __construct(string $passwordDb, string $passwordRequest)
+    public function __construct(string $passwordDb, Password $passwordRequest)
     {
         $this->passwordDb = $passwordDb;
         $this->passwordRequest = $passwordRequest;
@@ -38,7 +39,7 @@ class CheckPasswordQuery implements Query
     }
     /**
      * Method to get password
-     * @return string
+     * 
      */
     public function getPasswordRequest()
     {

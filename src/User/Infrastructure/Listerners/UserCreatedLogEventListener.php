@@ -45,15 +45,12 @@ class UserCreatedLogEventListener  implements ShouldQueue
     public function handle(UserCreatedLogEvent $event)
     {
      
-      $userLogEvent=  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),UserCreatedLogEventListener::class);
-    //  var_dump($userLogEvent->getId());
-   //   var_dump($userLogEvent);
-        $this->userLogRepository->insertLogUserCreation($userLogEvent);
+      $userLog=  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
+ 
+        $this->userLogRepository->save($userLog);
 
-        $this->userLogReadRepository->insertUserLog($userLogEvent);
-      /*   $this->userLogRepository->logUserUpdate($updateEvent);
-        $this->userReadRepository->logUserUpdate($updateEvent); */
-
+        $this->userLogReadRepository->save($userLog);
+    
 
       
 

@@ -34,5 +34,8 @@ interface UserLogReadRepositoryInterface
  */
     public function getLogByAction(string $action);
 
+    public function save(UserLog $event);
+
+
 
 }

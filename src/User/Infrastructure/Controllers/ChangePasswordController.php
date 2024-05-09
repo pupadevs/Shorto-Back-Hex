@@ -12,29 +12,40 @@ use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 
 class ChangePasswordController
 {
+    /**
+     * @var ChangePasswordService $changePasswordService
+     */
     private ChangePasswordService $changePasswordService;
-
+/**
+ * ChangePasswordController construct
+ * @param ChangePasswordService $changePasswordService
+ */
     public function __construct(ChangePasswordService $changePasswordService)
     {
 
         $this->changePasswordService = $changePasswordService;
     }
 
-    public function __invoke(Request $request):JsonResponse
+    /**
+     * Invoke method to change password
+     * @param Request $request
+     * @param string $uuid
+     * @return JsonResponse
+     * @throws HttpResponseException
+     * @throws UserNotFoundException
+     */
+    public function __invoke(Request $request, string $uuid):JsonResponse
     {
+        $data = $request->all();
 
         try {
-            $data = $request->all();
 
-            $this->changePasswordService->execute($data['email'], $data['password_old'], $data['new_password']);
+            $this->changePasswordService->execute( $request->input('password_old'), $request->input('new_password'), $uuid);
 
             return response()->json(['message' => 'Password changed successfully'], 200);
-        } catch (UserNotFoundException $e) {
-            throw new HttpResponseException (response()->json(['message' => $e->getMessage()], 404));
-        }catch (\Exception $e) {
-
-            throw new HttpResponseException (response()->json(['message' => $e->getMessage()], 500));
-        }
+        } catch (UserNotFoundException | \InvalidArgumentException $e) {
+            throw new HttpResponseException (response()->json(['message' => $e->getMessage()], $e->getCode()));
+        } 
 
     }
 }
