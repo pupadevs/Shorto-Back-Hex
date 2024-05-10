@@ -1,25 +1,27 @@
 {
     "version": 2,
-    "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.0" }
-    },
     "builds": [
       {
         "src": "artisan migrate --force --database=mysql",
-        "use": "@vercel/php@7"
+        "use": "@vercel/php@8.2"
       },
       {
         "src": "artisan migrate --force --database=mysql_read",
-        "use": "@vercel/php@7"
+        "use": "@vercel/php@8.2"
       },
       {
         "src": "artisan key:generate",
-        "use": "@vercel/php@7"
+        "use": "@vercel/php@8.2"
       }
     ],
+    "functions": {
+      "api/index.php": {
+        "runtime": "@vercel/php@8.2"
+      }
+    },
     "routes": [
       {
-        "src": "/(.*)",
+        "src": "/api/(.*)",
         "dest": "/api/index.php"
       }
     ],
