@@ -26,7 +26,7 @@ class UserCreatedLogEvent
        // parent::__construct($userId, $action, $ip, $eventType = $this->getEventType());
    
         
-       $this->id = Uuid::uuid4()->toString();
+     //  $this->id = Uuid::uuid4()->toString();
         $this->userId = $userId;
 
         $this->action = 'User created';

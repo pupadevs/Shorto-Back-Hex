@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->references('id')->on('users');
+            $table->uuid('user_id');
             $table->string('action');
             $table->string('ip');
             $table->string('event_type');

@@ -16,7 +16,7 @@ class CheckPasswordQueryHandler
      */
     public function handle(CheckPasswordQuery $query): bool
     {
-        $password = password_verify($query->getPasswordRequest()->toString(), $query->getPasswordDb());
+        $password = password_verify($query->getPasswordRequest(), $query->getPasswordDb());
     
         if ($password) {
         return $password;

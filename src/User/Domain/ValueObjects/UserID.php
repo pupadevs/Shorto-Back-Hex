@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Source\User\Domain\ValueObjects;
 
 use Ramsey\Uuid\Uuid;
+use Source\Shared\StringValueObject\StringValueObject;
 
 class UserID implements StringValueObject
 {

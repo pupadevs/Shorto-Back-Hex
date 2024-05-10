@@ -35,8 +35,9 @@ class CreateUserService
      * Method to create user
      * @param string $name, string $email, string $password
      * @throws \InvalidArgumentException
+     * @return void
      */
-    public function execute(?string $name = null, ?string $email = null, ?string $password = null)
+    public function execute(?string $name = null, ?string $email = null, ?string $password = null):void
     {
     
             $this->query->handle(new CheckEmailQuery(new Email($email)));

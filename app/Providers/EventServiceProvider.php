@@ -7,9 +7,17 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Source\User\App\Events\UserCreatedReadEvent;
+use Source\User\Domain\Events\ChangePasswordLogEvent;
+use Source\User\Domain\Events\ChangePasswordReadEvent;
+use Source\User\Domain\Events\DeleteUserLogEvent;
+use Source\User\Domain\Events\DeleteUserReadEvent;
 use Source\User\Domain\Events\UserCreatedLogEvent;
 use Source\User\Domain\Events\UserUpdatedLogEvent;
 use Source\User\Domain\Events\UserUpdatedReadEvent;
+use Source\User\Infrastructure\Listerners\ChangePasswordLogEventListener;
+use Source\User\Infrastructure\Listerners\ChangePasswordReadEventListener;
+use Source\User\Infrastructure\Listerners\DeleteUserLogEventListerner;
+use Source\User\Infrastructure\Listerners\DeleteUserReadEventListener;
 use Source\User\Infrastructure\Listerners\UserCreatedLogEventListener;
 use Source\User\Infrastructure\Listerners\UserDuplicationReadEventListener;
 use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
@@ -23,24 +31,43 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
+
+        //UserCRUD in read database
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        UserCreatedLogEvent::class => [
-            UserCreatedLogEventListener::class,
-           
+       
+        ChangePasswordReadEvent::class => [
+            ChangePasswordReadEventListener::class
         ],
 
         UserCreatedReadEvent::class => [
             UserDuplicationReadEventListener::class
         ],
+     
+        UserUpdatedReadEvent::class => [
+            UserUpdateReadEventListerner::class
+        ],
+        DeleteUserReadEvent::class => [
+            DeleteUserReadEventListener::class
+        ],
+
+     
+        //UserLogs
+        UserCreatedLogEvent::class => [
+            UserCreatedLogEventListener::class,
+           
+        ],
         UserUpdatedLogEvent::class => [
             UserUpdateLogEventListerner::class
         ],
-        UserUpdatedReadEvent::class => [
-            UserUpdateReadEventListerner::class
+        ChangePasswordLogEvent::class => [
+            ChangePasswordLogEventListener::class
+        ],
+        DeleteUserLogEvent::class => [
+            DeleteUserLogEventListerner::class
         ]
-        
+
     ];
 
     /**

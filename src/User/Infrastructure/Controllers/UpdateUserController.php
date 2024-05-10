@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Controllers;
 
+
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Source\User\App\Services\UpdateUserService;
 use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
 use Source\User\Infrastructure\Repository\Exception\TransactionErrorException;
@@ -39,6 +41,14 @@ class UpdateUserController
  */
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
+        if(!Auth::check()) {
+
+            $user = Auth::user();
+            if($user != $request->bearerToken()) {
+            var_dump($user);
+            }
+
+        }
         try{
 
        $user=  $this->updateUserService->execute($request->email,$request->name,$request->password, $uuid);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Source\User\Domain\ValueObjects;
 
+use Source\Shared\StringValueObject\StringValueObject;
+
 class Name implements StringValueObject
 {
     /**

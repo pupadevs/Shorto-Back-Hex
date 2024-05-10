@@ -7,6 +7,7 @@ use Source\User\App\Commands\ChangePasswordCommand;
 use Source\User\App\Commands\ChangePasswordCommandHandler;
 use Source\User\App\Commands\UserCreateCommand;
 use Source\User\App\Commands\UserCreateCommandHandler;
+use Source\User\Domain\Interfaces\RoleManagerInterface;
 use Source\User\Domain\Interfaces\UserLogReadRepositoryInterface;
 use Source\User\Domain\Interfaces\UserLogRepositoryInterface;
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
@@ -16,6 +17,7 @@ use Source\User\Infrastructure\Repository\Read\UserLogReadRepository;
 use Source\User\Infrastructure\Repository\Read\UserReadRepository;
 use Source\User\Infrastructure\Repository\UserLogRepository;
 use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Infrastructure\Repository\SpatieRoleManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
        // $this->app->bind(UserLogRepositoryInterface::class, UserLogRepositoryInMemory::class);
 
         $this->app->bind(UserLogReadRepositoryInterface::class, UserLogReadRepository::class);
+        $this->app->bind(RoleManagerInterface::class, SpatieRoleManager::class);
+
+        $this->app->bind(\Illuminate\Contracts\Queue\Factory::class, \Illuminate\Queue\QueueManager::class);
 
    //  $this->app->bind(UserCreatedEvent::class, LogUserCreation::class);
     }

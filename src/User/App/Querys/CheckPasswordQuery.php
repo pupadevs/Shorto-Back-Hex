@@ -39,11 +39,11 @@ class CheckPasswordQuery implements Query
     }
     /**
      * Method to get password
-     * 
+     * @return string
      */
     public function getPasswordRequest()
     {
       
-        return $this->passwordRequest;
+        return $this->passwordRequest->toString();
     }
 }

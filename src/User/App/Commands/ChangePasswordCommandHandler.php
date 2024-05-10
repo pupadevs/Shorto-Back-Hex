@@ -41,7 +41,7 @@ class ChangePasswordCommandHandler
      */
 
      
-    public function execute(ChangePasswordCommand $command)
+    public function execute(ChangePasswordCommand $command): void
     {
         
        $user = $command->getUser();

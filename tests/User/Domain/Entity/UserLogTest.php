@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\User\Domain\Entity;
+namespace Source\User\Domain\Entity;
 
 use PHPUnit\Framework\TestCase;
 use Source\User\Domain\Entity\UserLog as EntityUserLog;

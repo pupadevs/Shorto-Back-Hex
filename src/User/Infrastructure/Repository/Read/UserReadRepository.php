@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
 use Source\User\Domain\Events\ChangePasswordReadEvent;
+use Source\User\Domain\Events\DeleteUserReadEvent;
 use Source\User\Domain\Events\UserUpdatedReadEvent;
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
@@ -115,5 +116,12 @@ class UserReadRepository implements UserReadRepositoryInterface{
         }
 
        throw new EmailExistsException();
+    }
+
+    public function deleteUser(DeleteUserReadEvent $user)
+
+    {
+
+        $user = DB::connection('mysql_read')->table('users')->where('id', $user->getUser()->getId()->toString())->delete();
     }
 }

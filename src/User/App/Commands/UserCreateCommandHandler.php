@@ -11,10 +11,12 @@ use Source\User\App\Commands\UserCreateCommand;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
 use Source\User\Domain\Events\UserCreatedLogEvent;
+use Source\User\Domain\Interfaces\RoleManagerInterface;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\Name;
 use Source\User\Domain\ValueObjects\Password;
+
 //make unit tests
 class UserCreateCommandHandler
 {
@@ -38,7 +40,7 @@ class UserCreateCommandHandler
      * @return void
      * 
      */
-    public function execute(UserCreateCommand $command)
+    public function execute(UserCreateCommand $command): void
 {
     // Crear un objeto User
     $user = User::createUser(
@@ -49,6 +51,7 @@ class UserCreateCommandHandler
 
 
         $this->userRepositoryInterface->insertUser($user);
+       
         event(new UserCreatedReadEvent($user));
     event(new UserCreatedLogEvent($user->getId()->toString()));
 }

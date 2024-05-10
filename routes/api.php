@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Source\User\Infrastructure\Controllers\ChangePasswordController;
 use Source\User\Infrastructure\Controllers\DeleteUserController;
 use Source\User\Infrastructure\Controllers\FindUserByIdController;
+use Source\User\Infrastructure\Controllers\LoginController;
 use Source\User\Infrastructure\Controllers\RegisterUserController;
 use Source\User\Infrastructure\Controllers\TestController;
 use Source\User\Infrastructure\Controllers\UpdateUserController;
@@ -28,4 +29,6 @@ Route::get('/show/{uuid}', FindUserByIdController::class);
 Route::put('/update/{uuid}', UpdateUserController::class);
 Route::patch('/change-password/{uuid}', ChangePasswordController::class);
 Route::delete('/delete/{uuid}', DeleteUserController::class);
+
+Route::post('/login', LoginController::class)->name('login');
 
