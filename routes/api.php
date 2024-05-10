@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Source\User\Infrastructure\Controllers\ChangePasswordController;
+use Source\User\Infrastructure\Controllers\DeleteUserController;
 use Source\User\Infrastructure\Controllers\FindUserByIdController;
 use Source\User\Infrastructure\Controllers\RegisterUserController;
 use Source\User\Infrastructure\Controllers\TestController;
@@ -23,5 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/register', RegisterUserController::class)->name('register');   
 Route::get('/show/{uuid}', FindUserByIdController::class); 
-Route::put('/user/update/{uuid}', UpdateUserController::class);
+Route::put('/update/{uuid}', UpdateUserController::class);
+Route::patch('/change-password/{uuid}', ChangePasswordController::class);
+Route::delete('/delete/{uuid}', DeleteUserController::class);
 

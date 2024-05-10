@@ -7,6 +7,7 @@ namespace Source\User\Domain\Interfaces;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
 use Source\User\Domain\Events\ChangePasswordReadEvent;
+use Source\User\Domain\Events\DeleteUserReadEvent;
 use Source\User\Domain\Events\UserUpdatedReadEvent;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\UserID;
@@ -49,6 +50,8 @@ interface UserReadRepositoryInterface
      * @return bool
      */
     public function emailExists(Email $email): bool;
+
+    public function deleteUser(DeleteUserReadEvent $user);
 
   
 }

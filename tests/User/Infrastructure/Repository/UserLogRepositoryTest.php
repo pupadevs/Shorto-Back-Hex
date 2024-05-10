@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\User\Infrastructure\Repository;
+namespace Source\User\Infrastructure\Repository;
 
 use Source\User\Domain\Entity\UserLog;
 use Source\User\Domain\Events\UserCreatedLogEvent;
 use Source\User\Domain\Events\UserUpdatedLogEvent;
 use Source\User\Domain\Interfaces\UserLogRepositoryInterface;
 use Source\User\Domain\ValueObjects\UserID;
-use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 use Source\User\Infrastructure\Repository\Memory\UserLogRepositoryInMemory;
-use Source\User\Infrastructure\Repository\Memory\UserRepositoryInMemory;
 use Source\User\Infrastructure\Repository\UserLogRepository;
 use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
 use Tests\Fixtures\Users;
@@ -52,7 +50,7 @@ class UserLogRepositoryTest extends TestCase
         $event = new UserCreatedLogEvent($user->getId()->toString());
         $event->setIp('127.0.0.1');
         $logEvent =  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
-        $userLogRepository->insertLogUserCreation($logEvent);
+        $userLogRepository->save($logEvent);
         $this->assertTrue(true);
     }
 
@@ -69,7 +67,7 @@ class UserLogRepositoryTest extends TestCase
         $event = new UserUpdatedLogEvent($user->getId()->toString());
         $event->setIp('127.0.0.1');
         $logEvent =  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
-        $userLogRepository->insertLogUserUpdate($logEvent);
+        $userLogRepository->save($logEvent);
         $this->assertTrue(true);
 
     }

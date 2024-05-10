@@ -31,38 +31,8 @@ class UserLogReadRepository implements UserLogReadRepositoryInterface
  * 
  */
 
-    public function insertUserLog(UserLog $event){
-       
-        $user = DB::connection('mysql_read')->table('users_logs')->insert([
-            'user_id' => $event->getUserID(),
-            'action' => $event->getAction(),
-            'event_type' => UserCreatedLogEvent::class ,
-            'id' => (string) $event->getId(),
-            'created_at' => date('Y-m-d H:i:s'),
-            'ip' => $event->getIp(),
-            'event_handler' => UserCreatedLogEventListener::class
-        
-        ]); 
-       
-    }
 
-    /**
-     * save a new user in the database Read
-     * @param UserUpdatedLogEvent $event
-     */
-
-    public function logUserUpdate(UserUpdatedLogEvent $event){
-
-        DB::connection('mysql_read')->table('users_logs')->insert([
-           'user_id' => $event->getUserID(),
-           'action' => $event->getAction(),
-           'event_type' => UserUpdatedLogEvent::class ,
-           'id' => (string) $event->getId(),
-           'created_at' => now(),
-           'ip' => $_SERVER['REMOTE_ADDR'],
-           'event_handler' => UserUpdateLogEventListerner::class
-         ]);
-   }
+  
 
    /**
     * get user logs by action from database read

@@ -17,16 +17,8 @@ interface UserLogReadRepositoryInterface
      */
 
     public function getUserLogs():array;
-/**
- * Method to insert user log
- * @param UserLog $event
- */
-    public function insertUserLog(UserLog $event);
-    /**
-     * Method to log user created
-     * @param UserCreatedLogEvent $event
-     */
-    public function logUserUpdate(UserUpdatedLogEvent $event);
+
+   
 /**
  * Method to get user log by action
  * @param string $action
@@ -34,6 +26,10 @@ interface UserLogReadRepositoryInterface
  */
     public function getLogByAction(string $action);
 
+    /**
+ * Method to insert user log
+ * @param UserLog $event
+*/
     public function save(UserLog $event);
 
 
