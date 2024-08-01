@@ -1,6 +1,7 @@
 <?php 
 
 declare(strict_types=1);
+
 namespace Source\User\App\Commands;
 use Source\Shared\CQRS\Command\Command;
 use Source\User\Domain\Entity\User;

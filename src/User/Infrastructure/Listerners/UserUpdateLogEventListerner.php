@@ -20,19 +20,19 @@ class UserUpdateLogEventListerner  implements ShouldQueue
 /**
  * @var UserLogReadRepositoryInterface $userLogReadRepository
  */
-    private UserLogReadRepositoryInterface $userReadRepository;
+    private UserLogReadRepositoryInterface $userLogReadRepository;
    
 
 /**
  * UserCreatedLogEventListener constructor.
  * @param UserLogRepositoryInterface $userLogRepository
- * @param UserLogReadRepositoryInterface $userReadRepository
+ * @param UserLogReadRepositoryInterface $userLogReadRepository
  */
-    public function __construct(UserLogRepositoryInterface $userLogRepository,UserLogReadRepositoryInterface $userReadRepository)   
+    public function __construct(UserLogRepositoryInterface $userLogRepository,UserLogReadRepositoryInterface $userLogReadRepository)   
     {
         $this->userLogRepository = $userLogRepository;
 
-        $this->userReadRepository = $userReadRepository;
+        $this->userLogReadRepository = $userLogReadRepository;
     
 
     }
@@ -49,7 +49,7 @@ class UserUpdateLogEventListerner  implements ShouldQueue
        
         $this->userLogRepository->save($userLogEvent);
 
-        $this->userReadRepository->save($userLogEvent);
+        $this->userLogReadRepository->save($userLogEvent);
 
 
       

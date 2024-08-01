@@ -33,10 +33,10 @@ class Handler extends ExceptionHandler
     }
     public function render($request, Throwable $exception)
     {
-       /*  if ($exception instanceof MethodNotAllowedHttpException) {
+        if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json(['error' => 'El metodo que estas utilizando no es valido.'], 405);
 
-        }  */
+        } 
            /*  if ($exception instanceof RouteNotFoundException) {
                 return response()->json(['error' => 'El metodo que estas utilizando no es valido.'], 405);
 

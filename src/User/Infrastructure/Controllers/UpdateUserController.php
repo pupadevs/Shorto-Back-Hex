@@ -41,17 +41,10 @@ class UpdateUserController
  */
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
-        if(!Auth::check()) {
-
-            $user = Auth::user();
-            if($user != $request->bearerToken()) {
-            var_dump($user);
-            }
-
-        }
+       
         try{
 
-       $user=  $this->updateUserService->execute($request->email,$request->name,$request->password, $uuid);
+       $user=  $this->updateUserService->execute($request->email,$request->name,$request->ip, $uuid);
 
             return response()->json(['message' => 'User updated successfully', 'user' => ["id" => $user->getId()->toString(), "name" => $user->getName()->toString(), "email" => $user->getEmail()->toString()]], 200);
             

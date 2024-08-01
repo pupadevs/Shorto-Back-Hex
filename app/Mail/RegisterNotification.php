@@ -14,7 +14,8 @@ class RegisterNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public User $user;
+    protected $user;
+
     /**
      * Create a new message instance.
      */
@@ -28,22 +29,20 @@ class RegisterNotification extends Mailable
      */
     public function envelope(): Envelope
     {
-        
         return new Envelope(
             subject: 'Register Notification',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
+
+    public function build()
     {
-        return new Content(
-            view: 'RegisterNotification',
-        );
+        return $this->view('emails.register_notification')->subject('Register Notification')->with(['user' => $this->user]);
     }
 
+
+        
+ 
     /**
      * Get the attachments for the message.
      *

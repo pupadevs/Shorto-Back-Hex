@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Source\User\App\Commands;
 
+use App\Jobs\SendRegisterNotificationJob;
 use App\Mail\RegisterNotification;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Mail;
 use Source\User\App\Commands\UserCreateCommand;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User;
 use Source\User\Domain\Events\UserCreatedLogEvent;
-use Source\User\Domain\Interfaces\RoleManagerInterface;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\Password;
+use Illuminate\Support\Facades\Mail;
 
 //make unit tests
 class UserCreateCommandHandler
@@ -37,22 +33,19 @@ class UserCreateCommandHandler
     /**
      * Method to execute command
      * @param UserCreateCommand $command
-     * @return void
+     * @return User
      * 
      */
-    public function execute(UserCreateCommand $command): void
+    public function execute(UserCreateCommand $command)
 {
     // Crear un objeto User
-    $user = User::createUser(
-        new Name($command->getName()), 
-        new Email($command->getEmail()), 
-        new Password($command->getPassword())
-    );
-
-
+    $user = $command->getUser();
         $this->userRepositoryInterface->insertUser($user);
        
         event(new UserCreatedReadEvent($user));
-    event(new UserCreatedLogEvent($user->getId()->toString()));
+    event(new UserCreatedLogEvent($user->getId()->toString(),$command->getIp()));
+ SendRegisterNotificationJob::dispatch($user);
+    //Mail::to($user->getEmail()->ToString())->send(new RegisterNotification($user));
+    return $user;
 }
 }

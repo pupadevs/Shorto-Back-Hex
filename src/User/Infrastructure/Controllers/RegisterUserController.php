@@ -25,13 +25,11 @@ class RegisterUserController
 /**
  * RegisterUserController constructor.
  * @param CreateUserService $createUserService
- * @param CommandBus $commandBus
  */
-    public function __construct(CreateUserService $createUserService, CommandBus $commandBus)
+    public function __construct(CreateUserService $createUserService)
     {
         $this->createUserService = $createUserService;
 
-        $this->commandBus = $commandBus;
     }
 
     /**
@@ -46,20 +44,18 @@ class RegisterUserController
     public function __invoke(Request $request): JsonResponse
     {
          try {
-            $data = $request->all();
-       
-            $this->createUserService->execute($data['name'] ?? null, $request->email ?? null, $request->password ?? null);
+        
+           $this->createUserService->execute($request->name ?? null, $request->email ?? null, $request->password ?? null, $request->ip() ?? null);
 
             return response()->json(['message' => 'User created successfully'], 201);
-        }catch(\InvalidArgumentException $exception) {
+        }catch(\InvalidArgumentException  $exception) {
+            
+            throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
+        }catch( EmailExistsException $exception) {
             
             throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
         }
-        catch (EmailExistsException $exception) {
-
-            throw new HttpResponseException(response()->json(['message' => $exception->getMessage()], $exception->getCode()));
-        } 
- 
+       
 
     }
 }

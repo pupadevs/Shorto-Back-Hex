@@ -8,8 +8,7 @@ use Source\User\Domain\Events\ChangePasswordLogEvent;
 use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Password;
+
 
 class ChangePasswordCommandHandler
 {
@@ -28,10 +27,10 @@ class ChangePasswordCommandHandler
      * @param UserRepositoryInterface $userRepositoryInterface
      * @param UserReadRepositoryInterface $userReadRepositoryInterface
      */
-    public function __construct(UserRepositoryInterface $userRepositoryInterface, UserReadRepositoryInterface $userReadRepositoryInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
-        $this->userReadRepositoryInterface = $userReadRepositoryInterface;
+      
     }
 
     /**
@@ -45,10 +44,12 @@ class ChangePasswordCommandHandler
     {
         
        $user = $command->getUser();
-        $user->changePassword(new Password($command->getNewPassword()));
+       //$user->getPassword()->hashPassword($command->getNewPassword()->ToString());
+        $user->changePassword($command->getNewPassword());
         $this->userRepositoryInterface->save($user);
+       
        event(new ChangePasswordReadEvent($user));
 
-        event(new ChangePasswordLogEvent($user->getId()->toString()));
+        event(new ChangePasswordLogEvent($user->getId()->toString(),$command->getIp()));
     }
 }

@@ -17,7 +17,7 @@ class Users
     {   
         return User::createUser(
             new Name('John Doe'),
-            new Email(fake()->unique()->safeEmail()),
+            new Email(fake()->unique()->email()),
             new Password('a-password')
         );
     }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Repository\Memory;
 
 use Source\User\Domain\Entity\User;
+use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\Password;
 
 class UserRepositoryInMemory implements UserRepositoryInterface
 {
@@ -41,6 +43,14 @@ class UserRepositoryInMemory implements UserRepositoryInterface
     public function save(User $user):void
     {
         $this->users[$user->getId()->toString()] = $user;
+    }
+
+    public function changePassword(ChangePasswordReadEvent $event): void
+    {
+     $user=   $this->users[$event->getUser()->getId()->toString()] = $event->getUser();
+     $user->changePassword(new Password($event->getUser()->getPassword()->toString()));
+
+    
     }
 /**
  * Method to delete user

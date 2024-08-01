@@ -22,12 +22,10 @@ class AuthPassport
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        var_dump($token);
 
         // Verificar si el token existe en la base de datos de lectura
         $tokenExists = DB::connection('mysql_read')->table('oauth_access_tokens')->where('id', $token)->exists();
         $k = DB::connection('mysql_read')->table('oauth_access_tokens')->get();
-        var_dump($k);
 
         if (!$tokenExists) {
             return response()->json(['error' => 'Invalid token'], 401);

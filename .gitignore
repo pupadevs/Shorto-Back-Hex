@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+fly.toml
 .env
 .env.backup
 .env.production

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Source\User\App\Querys;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
-
 class CheckPasswordQueryHandler 
 {
     /**
@@ -16,13 +14,16 @@ class CheckPasswordQueryHandler
      */
     public function handle(CheckPasswordQuery $query): bool
     {
-        $password = password_verify($query->getPasswordRequest(), $query->getPasswordDb());
-    
-        if ($password) {
-        return $password;
+      
+        $password = password_verify($query->getPasswordRequest(), $query->getPasswordDb()->ToString());
+      
+       
+        if (!$password) {
+        throw new \InvalidArgumentException('Invalid password', 400);
 
         }
-            throw new \InvalidArgumentException('Invalid password', 400);
+        return $password;
+
 
         
 

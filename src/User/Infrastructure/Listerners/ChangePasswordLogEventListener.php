@@ -48,9 +48,9 @@ class ChangePasswordLogEventListener
      */
     public function handle(ChangePasswordLogEvent $event)
     {
-        $event->setEventHandler(self::class);
-        $this->userLogRepositoryInterface->save(UserLog::createUserLog( $event->getAction(), $event->getIp(),new UserID($event->getUserID()), $event->getEventType(), $event->getEventHandler()));
-        $this->userLogReadRepositoryInterface->save(UserLog::createUserLog( $event->getAction(), $event->getIp(),new UserID($event->getUserID()), $event->getEventType(), $event->getEventHandler()));
+      //  $event->setEventHandler(self::class);
+        $this->userLogRepositoryInterface->save(UserLog::createUserLog( $event->getAction(), $event->getIp(),new UserID($event->getUserID()), $event->getEventType(), self::class));
+        $this->userLogReadRepositoryInterface->save(UserLog::createUserLog( $event->getAction(), $event->getIp(),new UserID($event->getUserID()), $event->getEventType(), self::class));
     }
 
 }

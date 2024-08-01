@@ -36,11 +36,9 @@ class ChangePasswordController
      */
     public function __invoke(Request $request, string $uuid):JsonResponse
     {
-        $data = $request->all();
-
+      
         try {
-
-            $this->changePasswordService->execute( $request->input('password_old'), $request->input('new_password'), $uuid);
+            $this->changePasswordService->execute( $request->input('password_old')?? null, $request->input('new_password')?? null,$uuid,$request->ip?? null );
 
             return response()->json(['message' => 'Password changed successfully'], 200);
         } catch (UserNotFoundException | \InvalidArgumentException $e) {

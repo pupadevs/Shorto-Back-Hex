@@ -5,59 +5,35 @@ declare(strict_types=1);
 namespace Source\User\App\Commands;
 
 use Source\Shared\CQRS\Command\Command;
+use Source\User\Domain\Entity\User;
 
 class UserCreateCommand implements Command
 {
+   
     /**
-     * Name of user
+     * Ip of user
      * @var string
      */
-    private $name;
-/**
- * Email of user
- * @var string
- */
-    private $email;
-/**
- * Password of user
- * @var string
- */
-    private $password;
-/**
- * Command constructor.
- * @param string $name, string $email, string $password
- */
-    public function __construct($name, $email, $password)
+    private $ip;
+
+    private User $user;
+
+    public function __construct(User $user, $ip)
     {
 
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
+        $this->user = $user;
+        $this->ip = $ip;
     }
-/**
- * `Method to get name`
- * @return string
- */
-    public function getName()
-    {
-        return $this->name;
 
-    }
-/**
- * Method to get email
- * @return string
- */
-    public function getEmail()
+
+    public function getIp()
     {
-        return $this->email;
+        return $this->ip;
     }
-/**
- * Method to get password
- * @return string
- * 
- */
-    public function getPassword()
+
+    public function getUser()
     {
-        return password_hash($this->password, PASSWORD_DEFAULT);
+        return $this->user;
     }
+
 }
