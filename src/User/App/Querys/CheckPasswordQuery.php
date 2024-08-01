@@ -11,30 +11,32 @@ class CheckPasswordQuery implements Query
 {
     /**
      * Email of user
-     * @var string
-     */
-    private string $passwordDb;
-    /**
-     * Password of user
      * @var Password
      */
-    private Password $passwordRequest;
+    private Password $passwordDb;
+    /**
+     * Password of user
+     * @var string
+     */
+    private string $passwordRequest;
     /**
      * Query constructor.
-     * @param string $email, string $password
+     * 
+     * @param Password $passwordDb
+     * @param string $passwordRequest
      */
-    public function __construct(string $passwordDb, Password $passwordRequest)
+    public function __construct(Password $passwordDb, string $passwordRequest)
     {
         $this->passwordDb = $passwordDb;
         $this->passwordRequest = $passwordRequest;
     }
-/**
- * Method to get email
- * @return string
- */
-    public function getPasswordDb()
+
+    /**
+     * Summary of getPasswordDb
+     * @return \Source\User\Domain\ValueObjects\Password
+     */
+    public function getPasswordDb():Password
     {
-     
         return $this->passwordDb;
     }
     /**
@@ -44,6 +46,6 @@ class CheckPasswordQuery implements Query
     public function getPasswordRequest()
     {
       
-        return $this->passwordRequest->toString();
+        return $this->passwordRequest;
     }
 }

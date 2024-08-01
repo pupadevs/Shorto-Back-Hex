@@ -15,7 +15,7 @@ class UserLog
     public static function aUserCreatedLog(): EntityUserLog
     {
        $user=  Users::aUser();
-        $event = new UserCreatedLogEvent($user->getId()->toString());
+        $event = new UserCreatedLogEvent($user->getId()->toString(),"127.0.0.1");
       
         
       $userLog =  EntityUserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);

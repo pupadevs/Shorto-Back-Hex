@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Repository;
 
+use Source\User\App\Events\UserCreatedReadEvent;
 use Tests\TestCase;
 use Source\User\Domain\Interfaces\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\Name;
 use Source\User\Domain\ValueObjects\UserId;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
 use Source\User\Infrastructure\Repository\Memory\UserRepositoryInMemory;
+use Source\User\Infrastructure\Repository\Read\UserReadRepository;
 use Tests\Fixtures\Users;
 
 use function PHPUnit\Framework\assertTrue;
@@ -53,11 +56,18 @@ class UserRepositoryTest extends TestCase
     /**
      * @dataProvider dataProvider
      */
-/*     public function testCanReturnUserNotFoundException(UserRepositoryInterface $userRepository): void
+    public function testCanUpdate(UserRepositoryInterface $userRepository): void
     {
-        $this->expectException(UserNotFoundException::class);
-        $userRepository->findById(new UserId());
-    } */
+        $userReadRepository = new UserReadRepository();
+        $user = Users::aUser();
+        $userRepository->save($user);
+        $userReadRepository->insertUserReadDB(new UserCreatedReadEvent($user));
+        $user->changeName(new Name('John Doe'));
+        $userRepository->save($user);
+        $actual = $userReadRepository->getUserById($user->getId());
+        $this->assertEquals($user->getName()->ToString(), $actual->getName()->ToString());
+    }
+
 
     /**
      * @dataProvider dataProvider

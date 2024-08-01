@@ -25,7 +25,7 @@ interface UserRepositoryInterface
  * @return void
  */
     public function save(User $user);
-    public function changePassword(ChangePasswordReadEvent $event): void;
+
 
 /**
  * Method to delete user

@@ -41,9 +41,8 @@ class UserReadRepository implements UserReadRepositoryInterface{
      * 
      */
 
-    public function save(UserUpdatedReadEvent $user): void
+    public function save(UserUpdatedReadEvent  $user): void
     {
-        var_dump($user->getUser()->getPassword()->ToString());
         $data= [
             'name' => $user->getUser()->getName()->toString(),
             'email' => $user->getUser()->getEmail()->toString(),
@@ -56,7 +55,6 @@ class UserReadRepository implements UserReadRepositoryInterface{
 
      public function changePassword(ChangePasswordReadEvent $event): void
      {
-        var_dump($event->getUser()->getPassword()->ToString());
 
         $data= [
            
@@ -106,17 +104,19 @@ class UserReadRepository implements UserReadRepositoryInterface{
      * @return bool
      */
 
-    public function emailExists(Email $email): bool
-    {
-
-        $user =  DB::connection('mysql_read')->table('users')->where('email', $email->toString())->first();
-
-        if (!$user) {
-         return false;
-        }
-
-       throw new EmailExistsException();
-    }
+     public function emailExists(Email $email): bool
+     {
+         $exists = DB::connection('mysql_read')
+                     ->table('users')
+                     ->where('email', $email->toString())
+                     ->exists();
+     
+         if ($exists) {
+             throw new EmailExistsException();
+         }
+     
+         return true;
+     }
 
     public function deleteUser(DeleteUserReadEvent $user)
 

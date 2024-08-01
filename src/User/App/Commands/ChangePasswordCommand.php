@@ -22,6 +22,11 @@ class ChangePasswordCommand implements Command
  */
     private Password $new_password;
 /**
+ * Ip of user
+ * @var string $ip
+ */
+    private string $ip = '127.0.0.1';
+/**
  * Command constructor.
  * @param string $email, string $password_old, string $new_password
  * 
@@ -29,8 +34,8 @@ class ChangePasswordCommand implements Command
     public function __construct(User $user, Password $new_password)
     {
         $this->user = $user;
-       // $this->password_old = $password_old;
         $this->new_password = $new_password;
+     
     }
 
     /**
@@ -41,14 +46,22 @@ class ChangePasswordCommand implements Command
     {
         return $this->user;
     }
+/**
+ * Method to get ip
+ * @return string
+ */
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
 
 
 /**
  * Method to get new password
- * @return string
+ * @return Password
  */
-    public function getNewPassword()
+    public function getNewPassword(): Password
     {
-        return password_hash($this->new_password->toString(), PASSWORD_DEFAULT);
+        return $this->new_password;
     }
 }

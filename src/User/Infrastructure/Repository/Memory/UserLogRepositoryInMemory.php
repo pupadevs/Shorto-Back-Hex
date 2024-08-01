@@ -52,6 +52,20 @@ class UserLogRepositoryInMemory implements UserLogRepositoryInterface
         ];
     }
 
+    public function save(UserLog $event): void
+    {
+        $this->logs[] = [
+            'user_id' => $event->getUserID(),
+            'action' => $event->getAction(),
+            'event_type' => $event->getEventType(),
+            'id' => (string) $event->getId(),
+            'created_at' => now(),
+            'ip' => $event->getIp(),
+            'event_handler' => $event->getEventHandler(),
+        ];
+        
+    }
+
     // Opcional: Agregar un método para obtener todos los logs guardados en memoria
     /**
      * Method to get all user logs

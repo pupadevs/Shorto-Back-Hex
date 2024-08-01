@@ -14,16 +14,15 @@ class UserUpdatedLogEvent
 
     private string $action;
 
-    private string $ip = '127.0.0.1';
+    private string $ip;
 
     private string $id;
 
     private string $eventHandler;
 
 
-    public function __construct(string $userId )
+    public function __construct(string $userId ,string $ip)
     {
-       // parent::__construct($userId, $action, $ip, $eventType = $this->getEventType());
         
         $this->id = Uuid::uuid4()->toString();
         $this->userId = $userId;
@@ -31,8 +30,7 @@ class UserUpdatedLogEvent
         $this->action = 'User Updated';
         $this->eventType = self::class;
 
-
-       // $this->ip = $_SERVER['REMOTE_ADDR'];
+        $this->ip = $ip;
 
     }
 
@@ -48,22 +46,10 @@ class UserUpdatedLogEvent
         return $this->action;
 
     }
-
 public function getId(){
     return $this->id;
 }
     public function getIp(){
         return $this->ip;
-    }
-
-    public function setIp(string $ip){
-
-        return $this->ip = $ip;
-    }
-
-
-    
-
-
-  
+    }  
 }

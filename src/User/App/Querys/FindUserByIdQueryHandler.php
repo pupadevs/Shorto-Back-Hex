@@ -34,9 +34,10 @@ class FindUserByIdQueryHandler
 
     public function handle(FindUserByIdQuery $query): User
     {
-        
-
-        return $this->userReadRepository->getUserByID(new UserID
+        $user = $this->userReadRepository->getUserByID(new UserID
         ($query->getUserId()));
+       
+
+        return $user;
     }
 }

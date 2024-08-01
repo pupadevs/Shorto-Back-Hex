@@ -6,7 +6,6 @@ namespace Source\User\App\Querys;
 
 
 use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
 
 class CheckEmailQueryHandler{
 

@@ -21,7 +21,7 @@ class ChangePasswordLogEvent
     private string $eventHandler;
 
 
-    public function __construct(string $userId )
+    public function __construct(string $userId, string $ip )
     {
        // parent::__construct($userId, $action, $ip, $eventType = $this->getEventType());
    
@@ -31,7 +31,7 @@ class ChangePasswordLogEvent
 
         $this->action = 'Password changed';
 
-       $this->ip = "127.0.0.1";
+       $this->ip = $ip;
 
         $this->eventType = self::class;
 
@@ -48,19 +48,11 @@ class ChangePasswordLogEvent
         return $this->eventType;
     }
 
-    public function getEventHandler(){
-
-        return $this->eventHandler;
-    }
+  
 
     public function getAction(){
         return $this->action;
 
-    }
-
-    public function setIp(string $ip){
-        
-        $this->ip = $ip;
     }
 
 public function getId(){
@@ -69,15 +61,6 @@ public function getId(){
     public function getIp(){
         return $this->ip;
     }
-
-    public function setEventHandler(string $eventHandler){
-
-        $this->eventHandler = $eventHandler;
-    }
-
-
-    
-
 
   
 }

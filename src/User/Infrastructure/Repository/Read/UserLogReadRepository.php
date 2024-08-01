@@ -22,7 +22,7 @@ class UserLogReadRepository implements UserLogReadRepositoryInterface
      */
     public function getUserLogs():array
     {
-        $logs= DB::connection('mysql')->table('users_logs')->get();
+        $logs= DB::connection('mysql_read')->table('users_logs')->get();
         return get_object_vars($logs);
     }
 /**

@@ -21,7 +21,7 @@ class UserCreatedLogEvent
     private string $eventHandler;
 
 
-    public function __construct(string $userId )
+    public function __construct(string $userId, string $ip )
     {
        // parent::__construct($userId, $action, $ip, $eventType = $this->getEventType());
    
@@ -31,7 +31,7 @@ class UserCreatedLogEvent
 
         $this->action = 'User created';
 
-       $this->ip = "127.0.0.1";
+       $this->ip = $ip;
 
         $this->eventType = self::class;
 
@@ -58,20 +58,9 @@ class UserCreatedLogEvent
 
     }
 
-    public function setIp(string $ip){
-        
-        $this->ip = $ip;
-    }
-
-/* public function getId(){
-    return $this->id;
-} */
     public function getIp(){
         return $this->ip;
     }
-
-
-    
 
 
   

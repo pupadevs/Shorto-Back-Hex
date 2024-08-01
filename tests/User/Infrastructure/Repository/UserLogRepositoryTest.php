@@ -47,8 +47,7 @@ class UserLogRepositoryTest extends TestCase
     {   $useRepository = new UserRepositoryEloquentMySql();
         $user= Users::aUser();
         $useRepository->insertUser($user);
-        $event = new UserCreatedLogEvent($user->getId()->toString());
-        $event->setIp('127.0.0.1');
+        $event = new UserCreatedLogEvent($user->getId()->toString(),"127.0.0.1");
         $logEvent =  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
         $userLogRepository->save($logEvent);
         $this->assertTrue(true);
@@ -64,8 +63,7 @@ class UserLogRepositoryTest extends TestCase
         $user= Users::aUser();
         $useRepository = new UserRepositoryEloquentMySql();
         $useRepository->insertUser($user);
-        $event = new UserUpdatedLogEvent($user->getId()->toString());
-        $event->setIp('127.0.0.1');
+        $event = new UserUpdatedLogEvent($user->getId()->toString(),"37.0.0.1",);
         $logEvent =  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
         $userLogRepository->save($logEvent);
         $this->assertTrue(true);

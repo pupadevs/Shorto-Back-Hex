@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Controllers;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Source\User\App\Services\DeleteUserService;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 
@@ -17,9 +19,9 @@ class DeleteUserController{
         $this->deleteUserService = $deleteUserService;
     }
     
-    public function __invoke(string $uuid){
+    public function __invoke(string $uuid, Request $request): JsonResponse{
             try {
-                $this->deleteUserService->execute($uuid);
+                $this->deleteUserService->execute($uuid,$request->ip ?? null);
 
                 return response()->json(['message' => 'User deleted successfully'], 200);
         } catch (UserNotFoundException $exception) {

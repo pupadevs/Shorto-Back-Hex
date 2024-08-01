@@ -46,14 +46,6 @@ class DeleteUserLogEvent{
 
     }
 
-    public function setIp(string $ip){
-        
-        $this->ip = $ip;
-    }
-
-/* public function getId(){
-    return $this->id;
-} */
     public function getIp(){
         return $this->ip;
     }

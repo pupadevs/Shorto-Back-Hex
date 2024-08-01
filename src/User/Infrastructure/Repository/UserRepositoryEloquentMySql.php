@@ -57,7 +57,6 @@ class UserRepositoryEloquentMySql implements UserRepositoryInterface
     {
         $result = false;
 
-        var_dump($user->getPassword()->ToString());
         $data= [
             'name' => $user->getName()->toString(),
             'email' => $user->getEmail()->toString(),
@@ -75,7 +74,6 @@ class UserRepositoryEloquentMySql implements UserRepositoryInterface
 
     public function changePassword(ChangePasswordReadEvent $event): void
      {
-       // var_dump($event->getUser()->getPassword()->ToString());
 
         $data= [
            

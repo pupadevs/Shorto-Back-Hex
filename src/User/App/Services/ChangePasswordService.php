@@ -38,16 +38,17 @@ class ChangePasswordService implements ChangePasswordInterface
  * @param string|null $password_old,
  * @param string|null $new_password, 
  * @param string|null $uuid
+ * @param string|null $ip
  * @return void
  */
-    public function execute( ?string $password_old = null, ?string $new_password = null, ?string $uuid = null):void
+    public function execute( ?string $password_old , ?string $new_password , ?string $uuid , ?string $ip ):void
     {
-      $user=   $this->queryBus->handle(new FindUserByIdQuery( $uuid));
+      $user=   $this->queryBus->handle(new FindUserByIdQuery($uuid));
+    
 
       
-        $this->queryBus->handle(new CheckPasswordQuery( $user->getPassword()->toString(), new Password($password_old)));
-
-        $this->commandBus->execute(new ChangePasswordCommand($user, new Password($new_password)));
+        $this->queryBus->handle(new CheckPasswordQuery( $user->getPassword(), $password_old));
+        $this->commandBus->execute(new ChangePasswordCommand($user, new Password($new_password )));
 
 
         

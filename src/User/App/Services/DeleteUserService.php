@@ -35,7 +35,7 @@ class DeleteUserService{
  * @param string $uuid
  * @return void
  */
-    public function execute(string $uuid): void{
+    public function execute(string $uuid, ?string $ip): void{
 
         $user = $this->queryBus->handle(new FindUserByIdQuery($uuid));
 
