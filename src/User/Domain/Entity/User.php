@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Source\User\Domain\Entity;
 
+use Source\Role\Domain\Entity\Role;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\Name;
 use Source\User\Domain\ValueObjects\Password;
@@ -32,6 +33,8 @@ class User
  */
     private UserID $id;
 
+    private Role $role;
+
   /**
    * User constructor.
    * @param UserID $id
@@ -45,6 +48,7 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->id = $id;
+        
     }
 /**
  * Create a new user static method
@@ -137,5 +141,10 @@ class User
     public function changeName(Name $name):void{
 
         $this->name = $name;
+    }
+
+    public function addRole(Role $role): void
+    {
+        $this->role = $role;
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Source\Role\Domain\Events\RoleCreatedReadEvent;
+use Source\Role\Infrastructure\Listerners\RoleCreatedReadEventListener;
 use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Events\ChangePasswordLogEvent;
 use Source\User\Domain\Events\ChangePasswordReadEvent;
@@ -66,7 +68,14 @@ class EventServiceProvider extends ServiceProvider
         ],
         DeleteUserLogEvent::class => [
             DeleteUserLogEventListerner::class
-        ]
+        ],
+
+        //Role
+
+        //TODO: Roles Event
+            RoleCreatedReadEvent::class => [
+                RoleCreatedReadEventListener::class
+            ]
 
     ];
 

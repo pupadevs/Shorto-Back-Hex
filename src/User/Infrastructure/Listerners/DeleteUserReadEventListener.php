@@ -34,6 +34,7 @@ class DeleteUserReadEventListener implements ShouldQueue
     public  function handle(DeleteUserReadEvent $event){
 
         $this->userReadRepository->deleteUser($event);
+        
 
     }
 
