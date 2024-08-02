@@ -36,16 +36,13 @@ class UserCreateCommandHandler
      * @return User
      * 
      */
-    public function execute(UserCreateCommand $command)
+    public function execute(UserCreateCommand $command): User
 {
     // Crear un objeto User
     $user = $command->getUser();
         $this->userRepositoryInterface->insertUser($user);
        
         event(new UserCreatedReadEvent($user));
-    event(new UserCreatedLogEvent($user->getId()->toString(),$command->getIp()));
- SendRegisterNotificationJob::dispatch($user);
-    //Mail::to($user->getEmail()->ToString())->send(new RegisterNotification($user));
     return $user;
 }
 }
