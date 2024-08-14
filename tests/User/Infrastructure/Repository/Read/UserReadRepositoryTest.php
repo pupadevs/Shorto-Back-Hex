@@ -2,10 +2,10 @@
 
 namespace Source\User\Infrastructure\Repository\Read;
 
-use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User\User;
 use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordReadEvent;
 use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserReadEvent;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 use Source\User\Domain\ValueObjects\User\Password;

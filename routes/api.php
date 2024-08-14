@@ -5,15 +5,14 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Source\User\Domain\Interfaces\RoleRepository\RoleReadRepositoryInterface;
 use Source\User\Domain\Interfaces\RoleRepository\RoleRepositoryInterface;
-use Source\User\Infrastructure\Controllers\ChangePasswordController;
-use Source\User\Infrastructure\Controllers\DeleteUserController;
-use Source\User\Infrastructure\Controllers\FindUserByIdController;
-use Source\User\Infrastructure\Controllers\RegisterUserController;
 use Source\User\Infrastructure\Controllers\Role\RoleCreateController;
 use Source\User\Infrastructure\Controllers\Role\RoleDettachToUserController;
 use Source\User\Infrastructure\Controllers\ShowAllLogsController;
-
-use Source\User\Infrastructure\Controllers\UpdateUserController;
+use Source\User\Infrastructure\Http\Controllers\User\ChangePassword\ChangePasswordController;
+use Source\User\Infrastructure\Http\Controllers\User\DeleteUser\DeleteUserController;
+use Source\User\Infrastructure\Http\Controllers\User\FindUserById\FindUserByIdController;
+use Source\User\Infrastructure\Http\Controllers\User\RegisterUser\RegisterUserController;
+use Source\User\Infrastructure\Http\Controllers\User\UpdateUser\UpdateUserController;
 
 /*
 |--------------------------------------------------------------------------

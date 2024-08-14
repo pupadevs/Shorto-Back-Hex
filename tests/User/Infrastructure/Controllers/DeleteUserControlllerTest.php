@@ -6,8 +6,8 @@ namespace Source\User\Infrastructure\Controllers;
 
 
 use Mockery;
-use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\App\Services\User\DeleteUser\DeleteUserService;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;

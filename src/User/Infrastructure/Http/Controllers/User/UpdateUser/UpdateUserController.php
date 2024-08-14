@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Controllers;
+namespace Source\User\Infrastructure\Http\Controllers\User\UpdateUser;
 
 
 use Illuminate\Http\Exceptions\HttpResponseException;

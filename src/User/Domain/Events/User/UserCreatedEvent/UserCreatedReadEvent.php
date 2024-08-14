@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\App\Events;
+namespace Source\User\Domain\Events\User\UserCreatedEvent;
 
 use Illuminate\Support\Facades\Event;
 use Source\User\Domain\Entity\User\User;

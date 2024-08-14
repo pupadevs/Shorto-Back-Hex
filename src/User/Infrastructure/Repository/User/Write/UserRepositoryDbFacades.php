@@ -5,16 +5,9 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Repository\User\Write;
 
 use Illuminate\Support\Facades\DB;
-use Laravel\Passport\HasApiTokens;
-use Source\Role\Domain\ValueObjects\RoleID;
-use Source\Role\Domain\ValueObjects\RoleName;
 use Source\User\Domain\Entity\User\User;
-use Source\User\Domain\Events\ChangePasswordReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
 use Source\User\Infrastructure\Repository\Exception\TransactionErrorException;
-use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Source\Role\Domain\Entity\Role;
 
 class UserRepositoryDbFacades implements UserRepositoryInterface
 {

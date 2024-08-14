@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Controllers;
+namespace Source\User\Infrastructure\Http\Controllers\User\FindUserById;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;

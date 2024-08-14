@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Listerners;
+namespace Source\User\Infrastructure\Listerners\User\ChangePassword;
 
 use Source\User\Domain\Entity\UserLog\UserLog;
 use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordLogEvent;

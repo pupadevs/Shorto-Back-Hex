@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Listerners;
+namespace Source\User\Infrastructure\Listerners\User\DeleteUser;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserReadEvent;

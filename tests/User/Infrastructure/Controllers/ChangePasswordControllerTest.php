@@ -6,8 +6,8 @@ namespace Tests\User\Infrastructure\Controllers;
 
 
 use Mockery;
-use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\App\Services\User\ChangePassword\ChangePasswordService;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Infrastructure\Controllers\ChangePasswordController;
 use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;

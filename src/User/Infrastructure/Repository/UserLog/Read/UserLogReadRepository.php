@@ -8,11 +8,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Source\User\Domain\Entity\UserLog\UserLog;
-use Source\User\Domain\Events\UserCreatedLogEvent;
-use Source\User\Domain\Events\UserUpdatedLogEvent;
 use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogReadRepositoryInterface;
-use Source\User\Infrastructure\Listerners\UserCreatedLogEventListener;
-use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
+
 
 class UserLogReadRepository implements UserLogReadRepositoryInterface
 {

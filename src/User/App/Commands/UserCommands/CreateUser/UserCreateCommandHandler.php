@@ -6,8 +6,8 @@ namespace Source\User\App\Commands\UserCommands\CreateUser;
 
 
 use Source\User\App\Commands\UserCommands\CreateUser\UserCreateCommand;
-use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
 
 //make unit tests

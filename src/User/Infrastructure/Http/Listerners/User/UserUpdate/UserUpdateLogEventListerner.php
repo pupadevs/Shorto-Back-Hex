@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Listerners;
+namespace Source\User\Infrastructure\Listerners\User\UserUpdate;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Source\User\Domain\Entity\UserLog\UserLog;
@@ -10,6 +10,7 @@ use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedLogEvent;
 use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogRepositoryInterface;
 use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogReadRepositoryInterface;
 use Source\User\Domain\ValueObjects\User\UserID;
+use Source\User\Infrastructure\Listerners\User\UserCreated\UserCreatedLogEventListener;
 
 class UserUpdateLogEventListerner  implements ShouldQueue
 {

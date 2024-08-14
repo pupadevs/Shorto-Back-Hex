@@ -6,7 +6,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Source\User\App\Events\UserCreatedReadEvent;
 use Source\User\Domain\Events\Role\AttachUserReadEvent\AttachUserReadEvent;
 use Source\User\Domain\Events\Role\RoleCreateEvent\RoleCreatedReadEvent;
 use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordLogEvent;
@@ -14,18 +13,19 @@ use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordReadEvent;
 use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserLogEvent;
 use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserReadEvent;
 use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedLogEvent;
 use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedReadEvent;
-use Source\User\Infrastructure\Listerners\ChangePasswordLogEventListener;
-use Source\User\Infrastructure\Listerners\ChangePasswordReadEventListener;
-use Source\User\Infrastructure\Listerners\DeleteUserLogEventListerner;
-use Source\User\Infrastructure\Listerners\DeleteUserReadEventListener;
 use Source\User\Infrastructure\Listerners\Role\AttachUserReadDBEvent\AttachUserReadEventListener;
 use Source\User\Infrastructure\Listerners\Role\RoleReadDBEvent\RoleCreatedReadEventListener;
-use Source\User\Infrastructure\Listerners\UserCreatedLogEventListener;
-use Source\User\Infrastructure\Listerners\UserDuplicationReadEventListener;
-use Source\User\Infrastructure\Listerners\UserUpdateLogEventListerner;
-use Source\User\Infrastructure\Listerners\UserUpdateReadEventListerner;
+use Source\User\Infrastructure\Listerners\User\ChangePassword\ChangePasswordLogEventListener;
+use Source\User\Infrastructure\Listerners\User\ChangePassword\ChangePasswordReadEventListener;
+use Source\User\Infrastructure\Listerners\User\DeleteUser\DeleteUserLogEventListerner;
+use Source\User\Infrastructure\Listerners\User\DeleteUser\DeleteUserReadEventListener;
+use Source\User\Infrastructure\Listerners\User\UserCreated\UserCreatedLogEventListener;
+use Source\User\Infrastructure\Listerners\User\UserCreated\UserDuplicationReadEventListener;
+use Source\User\Infrastructure\Listerners\User\UserUpdate\UserUpdateLogEventListerner;
+use Source\User\Infrastructure\Listerners\User\UserUpdate\UserUpdateReadEventListerner;
 
 class EventServiceProvider extends ServiceProvider
 {

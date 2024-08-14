@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Repository;
 
-use Source\User\App\Events\UserCreatedReadEvent;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
 use Tests\TestCase;
 use Source\User\Domain\ValueObjects\User\Name;

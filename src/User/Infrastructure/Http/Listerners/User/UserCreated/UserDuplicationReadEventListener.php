@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Infrastructure\Listerners;
+namespace Source\User\Infrastructure\Listerners\User\UserCreated;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Source\User\App\Events\UserCreatedReadEvent;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 
 class UserDuplicationReadEventListener implements ShouldQueue {
