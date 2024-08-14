@@ -81,4 +81,13 @@ class RoleReadRepository implements RoleReadRepositoryInterface{
     public function detachRoleToUserInReadDatabase(UserID $userID, RoleID $role): void{
         
     }
+
+    public function showAllRoleUser(): array{
+        return DB::table('roles')
+        ->join('role_user', 'roles.id', '=', 'role_user.role_id')
+        ->join('users', 'users.id', '=', 'role_user.user_id')
+        ->select('roles.id as role_id', 'roles.name as role_name', 'users.id as user_id', 'users.name as user_name')
+        ->get()
+        ->groupBy('role_id')->toArray();
+    }
 }

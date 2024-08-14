@@ -26,4 +26,6 @@ interface RoleReadRepositoryInterface{
     public function atttachRoleToUserInReadDatabase(UserID $userID, RoleID $role): void;
 
     public function detachRoleToUserInReadDatabase(UserID $userID, RoleID $role): void;
+
+    public function showAllRoleUser(): array;
 }

@@ -8,6 +8,7 @@ use Source\User\Domain\Interfaces\RoleRepository\RoleRepositoryInterface;
 use Source\User\Infrastructure\Controllers\Role\RoleCreateController;
 use Source\User\Infrastructure\Controllers\Role\RoleDettachToUserController;
 use Source\User\Infrastructure\Controllers\ShowAllLogsController;
+use Source\User\Infrastructure\Http\Controllers\Role\ShowAllRoleUser\ShowAllRoleUserController;
 use Source\User\Infrastructure\Http\Controllers\User\ChangePassword\ChangePasswordController;
 use Source\User\Infrastructure\Http\Controllers\User\DeleteUser\DeleteUserController;
 use Source\User\Infrastructure\Http\Controllers\User\FindUserById\FindUserByIdController;
@@ -35,6 +36,7 @@ Route::patch('/change-password/{uuid}', ChangePasswordController::class);
 Route::delete('/delete/{uuid}', DeleteUserController::class);
 Route::put('/role/detach', RoleDettachToUserController::class);
 Route::post('/role', RoleCreateController::class)->name('role');
+Route::get('/role', ShowAllRoleUserController::class);
 
 Route::get('/show-logs', ShowAllLogsController::class);
 
