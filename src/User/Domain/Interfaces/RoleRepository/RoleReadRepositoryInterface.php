@@ -20,6 +20,8 @@ interface RoleReadRepositoryInterface{
     public function getRoleByName(Name $roleName): ?Role;
 
     public function roleExists(Name $roleName): bool;
+    
+    public function verifyUserHasRole(UserID $userID, RoleID $roleID): bool;
 
     public function atttachRoleToUserInReadDatabase(UserID $userID, RoleID $role): void;
 

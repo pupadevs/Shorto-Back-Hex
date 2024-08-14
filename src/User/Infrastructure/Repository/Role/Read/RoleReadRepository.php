@@ -67,6 +67,17 @@ class RoleReadRepository implements RoleReadRepositoryInterface{
 
     }
 
+    public function verifyUserHasRole(UserID $userID, RoleID $roleID): bool{
+
+        $user = $userID->toString();
+        $role = $roleID->toString();
+        $role = DB::connection('mysql_read')->table('role_user')->where('user_id', $user)->where('role_id', $role)->first();
+        if($role === null){
+            return false;   
+        }
+        return true;
+    }
+
     public function detachRoleToUserInReadDatabase(UserID $userID, RoleID $role): void{
         
     }
