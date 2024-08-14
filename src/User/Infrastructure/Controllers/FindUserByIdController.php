@@ -7,7 +7,7 @@ namespace Source\User\Infrastructure\Controllers;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Querys\FindUserByIdQuery;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 
 class FindUserByIdController

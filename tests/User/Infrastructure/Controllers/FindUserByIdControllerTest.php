@@ -6,15 +6,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Querys\FindUserByIdQuery;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
 use Source\User\Infrastructure\Controllers\FindUserByIdController;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 

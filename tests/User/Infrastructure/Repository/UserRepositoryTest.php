@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Repository;
 
 use Source\User\App\Events\UserCreatedReadEvent;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
 use Tests\TestCase;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\UserId;
+use Source\User\Domain\ValueObjects\User\Name;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
-use Source\User\Infrastructure\Repository\Memory\UserRepositoryInMemory;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Memory\UserRepositoryInMemory;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 
 use function PHPUnit\Framework\assertTrue;
@@ -29,7 +28,7 @@ class UserRepositoryTest extends TestCase
     {
         return [
             'In Memory' => [new UserRepositoryInMemory()],
-            'In MySQL' => [new UserRepositoryEloquentMySql()],
+            'In MySQL' => [new UserRepositoryDbFacades()],
         ];
     }
 

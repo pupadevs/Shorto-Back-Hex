@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Listerners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Source\User\Domain\Events\UserUpdatedReadEvent;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
+use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedReadEvent;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 
 class UserUpdateReadEventListerner  implements ShouldQueue
 {

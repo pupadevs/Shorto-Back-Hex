@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\User\Domain\ValueObjects;
 
+use Source\User\Domain\ValueObjects\User\UserID;
 use Tests\TestCase;
-use Source\User\Domain\ValueObjects\UserID;
 
 class UserIDTest extends TestCase
 {

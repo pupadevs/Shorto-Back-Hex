@@ -8,7 +8,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Source\Shared\CQRS\Command\CommandBus;
-use Source\User\App\Services\CreateUserService;
+use Source\User\App\Services\User\CreateUser\CreateUserService;
 use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
 
 class RegisterUserController

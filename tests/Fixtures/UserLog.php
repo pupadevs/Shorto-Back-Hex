@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures;
 
-use Source\User\Domain\Events\UserCreatedLogEvent;
-use Source\User\Domain\Events\UserUpdatedLogEvent;
-use Source\User\Domain\Entity\UserLog as EntityUserLog;
-use Source\User\Domain\ValueObjects\UserID;
+use Source\User\Domain\Entity\UserLog\UserLog as UserLogUserLog;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent;
+use Source\User\Domain\ValueObjects\User\UserID;
 
 class UserLog
 {
 
-    public static function aUserCreatedLog(): EntityUserLog
+    public static function aUserCreatedLog(): UserLogUserLog
     {
        $user=  Users::aUser();
         $event = new UserCreatedLogEvent($user->getId()->toString(),"127.0.0.1");
       
         
-      $userLog =  EntityUserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
+      $userLog =  UserLogUserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);
 
         return $userLog;
     }

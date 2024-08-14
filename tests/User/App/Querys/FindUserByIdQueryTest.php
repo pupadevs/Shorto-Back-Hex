@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Source\User\App\Querys;
+namespace Tests\User\App\Querys;
 
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Querys\FindUserByIdQuery;
-use Source\User\App\Querys\FindUserByIdQueryHandler;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQueryHandler;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 

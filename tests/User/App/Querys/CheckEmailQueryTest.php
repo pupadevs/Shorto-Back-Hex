@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Source\User\Domain\Events;
+namespace Tests\User\App\Querys;
+
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Querys\CheckEmailQuery;
-use Source\User\App\Querys\CheckEmailQueryHandler;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
+use Source\User\App\Querys\UserQuery\CheckEmail\CheckEmailQuery;
+use Source\User\App\Querys\UserQuery\CheckEmail\CheckEmailQueryHandler;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\Email;
 use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\TestCase;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+
 use Tests\Fixtures\Users;
 
 use function PHPUnit\Framework\assertEquals;
@@ -37,7 +39,7 @@ class CheckEmailQueryTest extends TestCase
         $this->userReadRepository = new UserReadRepository();
         $this->queryHandler = new CheckEmailQueryHandler($this->userReadRepository);
         $this->user = Users::aUser();
-        $this->userRepository = new UserRepositoryEloquentMySql();
+        $this->userRepository = new UserRepositoryDbFacades();
 
     }
 

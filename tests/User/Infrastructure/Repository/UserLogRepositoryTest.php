@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Repository;
 
-use Source\User\Domain\Entity\UserLog;
-use Source\User\Domain\Events\UserCreatedLogEvent;
-use Source\User\Domain\Events\UserUpdatedLogEvent;
-use Source\User\Domain\Interfaces\UserLogRepositoryInterface;
-use Source\User\Domain\ValueObjects\UserID;
-use Source\User\Infrastructure\Repository\Memory\UserLogRepositoryInMemory;
-use Source\User\Infrastructure\Repository\UserLogRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Domain\Entity\UserLog\UserLog;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent;
+use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedLogEvent;
+use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\UserID;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
+use Source\User\Infrastructure\Repository\UserLog\Memory\UserLogRepositoryInMemory;
+use Source\User\Infrastructure\Repository\UserLog\Write\UserLogRepository;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 
@@ -44,7 +44,7 @@ class UserLogRepositoryTest extends TestCase
      */
 
     public function testCanSaveUserLog(UserLogRepositoryInterface $userLogRepository): void
-    {   $useRepository = new UserRepositoryEloquentMySql();
+    {   $useRepository = new UserRepositoryDbFacades();
         $user= Users::aUser();
         $useRepository->insertUser($user);
         $event = new UserCreatedLogEvent($user->getId()->toString(),"127.0.0.1");
@@ -61,7 +61,7 @@ class UserLogRepositoryTest extends TestCase
     {
 
         $user= Users::aUser();
-        $useRepository = new UserRepositoryEloquentMySql();
+        $useRepository = new UserRepositoryDbFacades();
         $useRepository->insertUser($user);
         $event = new UserUpdatedLogEvent($user->getId()->toString(),"37.0.0.1",);
         $logEvent =  UserLog::createUserLog($event->getAction(),$event->getIp(),new UserID($event->getUserId()),$event->getEventType(),self::class);

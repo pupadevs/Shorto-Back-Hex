@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Listerners;
 
-use Source\User\Domain\Entity\UserLog;
-use Source\User\Domain\Events\ChangePasswordLogEvent;
-use Source\User\Domain\Interfaces\UserLogRepositoryInterface;
-use Source\User\Domain\Interfaces\UserLogReadRepositoryInterface;
-use Source\User\Domain\ValueObjects\UserID;
+use Source\User\Domain\Entity\UserLog\UserLog;
+use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordLogEvent;
+use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogRepositoryInterface;
+use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogReadRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\UserID;
 
 class ChangePasswordLogEventListener
 {

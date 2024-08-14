@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 use Mockery;
-use Source\User\App\Services\UpdateUserService;
+use Source\User\App\Services\User\UpdateUser\UpdateUserService;
 use Source\User\Infrastructure\Controllers\UpdateUserController;
 use Tests\Fixtures\Users;
 

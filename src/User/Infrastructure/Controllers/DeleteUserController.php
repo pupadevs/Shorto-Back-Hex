@@ -7,7 +7,7 @@ namespace Source\User\Infrastructure\Controllers;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Source\User\App\Services\DeleteUserService;
+use Source\User\App\Services\User\DeleteUser\DeleteUserService;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
 
 class DeleteUserController{

@@ -6,18 +6,18 @@ namespace Source\User\Infrastructure\Listerners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 
 class UserDuplicationReadEventListener implements ShouldQueue {
     /**
-     * @var UserReadRepository  $userReadRepository
+     * @var UserReadRepositoryInterface  $userReadRepository
      */
-    private UserReadRepository $userReadRepository;
+    private UserReadRepositoryInterface $userReadRepository;
 /**
  * UserDuplicationReadEventListener constructor.
- * @param UserReadRepository $userReadRepository
+ * @param UserReadRepositoryInterface $userReadRepository
  */
-    public function __construct(UserReadRepository $userReadRepository)
+    public function __construct(UserReadRepositoryInterface $userReadRepository)
     {
         $this->userReadRepository = $userReadRepository;
     }

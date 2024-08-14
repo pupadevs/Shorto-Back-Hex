@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Source\User\App\Events;
 
 use Illuminate\Support\Facades\Event;
-use Source\User\Domain\Entity\User;
+use Source\User\Domain\Entity\User\User;
 
 class UserCreatedReadEvent extends Event {
 /**

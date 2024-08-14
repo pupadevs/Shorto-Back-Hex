@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Source\User\Domain\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Source\User\Domain\Entity\UserLog as EntityUserLog;
+use Source\User\Domain\Entity\UserLog\UserLog as UserLogUserLog;
 use Source\User\Domain\ValueObjects\Email;
 use Source\User\Domain\ValueObjects\Name;
 use Source\User\Domain\ValueObjects\Password;
@@ -15,7 +15,7 @@ use function PHPUnit\Framework\assertIsString;
 
 class UserLogTest extends TestCase
 {
-    private EntityUserLog $userLog;
+    private UserLogUserLog $userLog;
 
     public function setUp(): void
     {
@@ -25,7 +25,7 @@ class UserLogTest extends TestCase
 
     public function testCanInstantiate(): void
     {
-        self::assertInstanceOf(EntityUserLog::class, $this->userLog);
+        self::assertInstanceOf(UserLogUserLog::class, $this->userLog);
     }
 
     public function testCanHaveAUniqueIdentifier(): void

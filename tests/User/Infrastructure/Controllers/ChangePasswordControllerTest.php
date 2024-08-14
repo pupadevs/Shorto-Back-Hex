@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\User\Infrastructure\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Event;
+
 use Mockery;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Services\ChangePasswordService;
+use Source\User\App\Services\User\ChangePassword\ChangePasswordService;
 use Source\User\Infrastructure\Controllers\ChangePasswordController;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 
@@ -27,7 +25,7 @@ class ChangePasswordControllerTest extends TestCase
     {
        
         $user = Users::aUser();
-        $userRepository = new UserRepositoryEloquentMySql();
+        $userRepository = new UserRepositoryDbFacades();
         $userRepository->save($user);
         event(new UserCreatedReadEvent($user));
         

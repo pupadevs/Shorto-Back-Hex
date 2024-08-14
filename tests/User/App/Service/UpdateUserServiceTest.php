@@ -3,10 +3,10 @@ namespace Tests\User\App\Service;
 use PHPUnit\Framework\TestCase;
 use Source\Shared\CQRS\Command\CommandBus;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Commands\UpdateUserCommand;
-use Source\User\App\Querys\FindUserByIdQuery;
-use Source\User\App\Services\UpdateUserService;
-use Source\User\Domain\Entity\User;
+use Source\User\App\Commands\UserCommands\UpdateUser\UpdateUserCommand;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
+use Source\User\App\Services\User\UpdateUser\UpdateUserService;
+use Source\User\Domain\Entity\User\User;
 
 class UpdateUserServiceTest extends TestCase
 {

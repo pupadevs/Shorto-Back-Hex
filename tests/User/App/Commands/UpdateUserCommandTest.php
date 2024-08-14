@@ -1,15 +1,15 @@
 <?php 
-namespace Source\User\App\Commands;
+namespace Source\User\Tests\App\Commands\UpdateUser;
 
 use Illuminate\Support\Facades\Event;
+use Source\User\App\Commands\UserCommands\UpdateUser\UpdateUserCommand;
+use Source\User\App\Commands\UserCommands\UpdateUser\UpdateUserCommandHandler;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 
@@ -24,7 +24,7 @@ class UpdateUserCommandTest extends TestCase
     {
         parent::setUp();
         $this->user = Users::aUser();
-        $this->userRepository = new UserRepositoryEloquentMySql();  
+        $this->userRepository = new UserRepositoryDbFacades();  
         $this->userReadRepository = new UserReadRepository();
         $this->updateUserCommandHandler = new UpdateUserCommandHandler($this->userRepository);
     }

@@ -3,8 +3,8 @@
 namespace Tests\User\Domain\Events;
 
 use Tests\TestCase;
-use Source\User\Domain\Events\UserCreatedLogEvent;
 use Ramsey\Uuid\Uuid;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent;
 
 class UserCreatedLogEventTest extends TestCase
 {
@@ -15,7 +15,7 @@ class UserCreatedLogEventTest extends TestCase
 
         $this->assertInstanceOf(UserCreatedLogEvent::class, $event);
         $this->assertEquals($userId, $event->getUserId());
-        $this->assertEquals('Source\User\Domain\Events\UserCreatedLogEvent', $event->getEventType());
+        $this->assertEquals('Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent', $event->getEventType());
         $this->assertEquals('User created', $event->getAction());
     }
 

@@ -1,8 +1,8 @@
 <?php 
 namespace Tests\User\Domain\ValueObjects;
 
+use Source\User\Domain\ValueObjects\User\Name;
 use Tests\TestCase;
-use Source\User\Domain\ValueObjects\Name;
 class NameTest extends TestCase
 {
     public function testCanInstantiate()

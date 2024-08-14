@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Source\User\Domain\Entity;
 
 use PHPUnit\Framework\TestCase;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\Password;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\ValueObjects\User\Email;
+use Source\User\Domain\ValueObjects\User\Name;
+use Source\User\Domain\ValueObjects\User\Password;
 use Tests\Fixtures\Users;
 
 use function PHPUnit\Framework\assertIsString;

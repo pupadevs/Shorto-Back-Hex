@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Listerners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Source\User\Domain\Events\DeleteUserReadEvent;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
+use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserReadEvent;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
 
 class DeleteUserReadEventListener implements ShouldQueue
 {

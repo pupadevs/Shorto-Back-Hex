@@ -3,12 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Source\Role\App\Service\AssingRoleToUserService;
-use Source\Role\App\Service\AssingRoleToUserServiceInterface;
-use Source\Role\Domain\RoleReadRepositoryInterface;
-use Source\Role\Domain\RoleRepositoryInterface;
-use Source\Role\Infrastructure\Repository\Read\RoleReadRepository;
-use Source\Role\Infrastructure\Repository\RoleRepository;
+use Source\User\App\Services\Role\AssingRoleToUserService;
+use Source\User\App\Services\Role\AssingRoleToUserServiceInterface;
+use Source\User\Domain\Interfaces\RoleRepository\RoleReadRepositoryInterface;
+use Source\User\Domain\Interfaces\RoleRepository\RoleRepositoryInterface;
+use Source\User\Infrastructure\Repository\Role\Read\RoleReadRepository;
+use Source\User\Infrastructure\Repository\Role\RoleRepository;
 
 class RoleServiceProvider extends ServiceProvider
 {

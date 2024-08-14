@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Source\User\Infrastructure\Listerners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Source\User\Domain\Entity\UserLog;
-use Source\User\Domain\Events\UserCreatedLogEvent;
-use Source\User\Domain\Interfaces\UserLogRepositoryInterface;
-use Source\User\Domain\Interfaces\UserLogReadRepositoryInterface;
-use Source\User\Domain\ValueObjects\UserID;
+use Source\User\Domain\Entity\UserLog\UserLog;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedLogEvent;
+use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogRepositoryInterface;
+use Source\User\Domain\Interfaces\UserLogRepositoryContracts\UserLogReadRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\UserID;
+
 /**
  * Class UserCreatedLogEventListener to insert user log
  * 
