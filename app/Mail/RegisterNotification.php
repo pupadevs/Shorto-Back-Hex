@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Source\User\Domain\Entity\User;
+use Source\User\Domain\Entity\User\User;
 
 class RegisterNotification extends Mailable
 {

@@ -3,7 +3,8 @@
 namespace Source\User\App\Events;
 
 use PHPUnit\Framework\TestCase;
-use Source\User\Domain\Entity\User;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
 use Tests\Fixtures\Users;
 
 class UserCreatedReadEventTest extends TestCase

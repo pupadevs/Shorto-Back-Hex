@@ -8,8 +8,10 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
-use Source\User\Domain\Entity\User;
+use Source\User\Domain\Entity\User\User;
 use App\Mail\RegisterNotification;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class SendRegisterNotificationJob implements ShouldQueue
 {
@@ -29,6 +31,12 @@ class SendRegisterNotificationJob implements ShouldQueue
      */
     public function handle(): void
     {
-      Mail::to($this->user->getEmail()->ToString())->send(new RegisterNotification($this->user));
-    }
+      try{
+        Mail::to($this->user->getEmail()->ToString())->send(new RegisterNotification($this->user));
+      }catch(Exception $e){
+        Log::error($e->getMessage());
+      }
+      }
+    
+    
 }

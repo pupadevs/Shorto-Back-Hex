@@ -1,8 +1,10 @@
 <?php 
 
 declare(strict_types=1);	
-namespace Source\User\Domain\ValueObjects;
+namespace Source\User\Domain\ValueObjects\User;
 
+
+use Source\User\Domain\ValueObjects\User\Password;
 use Tests\TestCase;
 
 class PasswordTest extends TestCase

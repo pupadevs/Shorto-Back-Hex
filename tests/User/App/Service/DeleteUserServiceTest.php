@@ -6,10 +6,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\TestCase;
 use Source\Shared\CQRS\Command\CommandBus;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Commands\DeleteUserCommand;
-use Source\User\App\Querys\FindUserByIdQuery;
-use Source\User\App\Services\DeleteUserService;
-use Source\User\Domain\Entity\User;
+use Source\User\App\Commands\UserCommands\DeleteUser\DeleteUserCommand;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
+use Source\User\App\Services\User\DeleteUser\DeleteUserService;
+use Source\User\Domain\Entity\User\User;
 
 class DeleteUserServiceTest extends TestCase
 {

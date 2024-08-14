@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Source\User\Infrastructure\Controllers;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
+
 use Illuminate\Http\Request;
 use Mockery;
-use Source\Shared\CQRS\Command\CommandBus;
-use Source\User\App\Services\CreateUserService;
+use Source\User\App\Services\User\CreateUser\CreateUserService;
 use Tests\TestCase;
 
 class RegisterUserControllerTest extends TestCase

@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Tests\User\App\Service;
 
 use App\Mail\RegisterNotification;
-use Illuminate\Support\Facades\Mail;
-use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Facades\Event;
 use Source\Shared\CQRS\Command\CommandBus;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Commands\UserCreateCommand;
-use Source\User\App\Querys\CheckEmailQuery;
-use Source\User\App\Services\CreateUserService;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\Password;
+use Source\User\App\Commands\UserCommands\CreateUser\UserCreateCommand;
+use Source\User\App\Querys\UserQuery\CheckEmail\CheckEmailQuery;
+use Source\User\App\Services\User\CreateUser\CreateUserService;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\ValueObjects\User\Email;
+use Source\User\Domain\ValueObjects\User\Name;
+use Source\User\Domain\ValueObjects\User\Password;
+use Tests\TestCase;
 
 class CreateUserServiceTest extends TestCase
 {
@@ -28,9 +28,11 @@ class CreateUserServiceTest extends TestCase
 
     public function testExecute()
     {
+        Event::fake();
         // Mocking CommandBus and QueryBus
         $commandBusMock = $this->createMock(CommandBus::class);
         $queryBusMock = $this->createMock(QueryBus::class);
+       
         
         // Creating the service with mocked dependencies
         $createUserService = new CreateUserService($commandBusMock, $queryBusMock);

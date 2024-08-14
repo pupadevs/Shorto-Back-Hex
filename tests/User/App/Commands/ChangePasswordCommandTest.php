@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Source\User\App\Commands;
+namespace Source\User\App\Commands\UserCommands\ChangePassword;
 
-use Source\User\App\Commands\ChangePasswordCommand;
+use Source\User\App\Commands\UserCommands\ChangePassword\ChangePasswordCommand;
+use Source\User\App\Commands\UserCommands\ChangePassword\ChangePasswordCommandHandler;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Password;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\Password;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 
@@ -27,10 +28,10 @@ class ChangePasswordCommandTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->userRepository = new UserRepositoryEloquentMySql();
+        $this->userRepository = new UserRepositoryDbFacades();
         $this->userReadRepository = new UserReadRepository();
         
-        $this->commandHandler = new ChangePasswordCommandHandler($this->userRepository, $this->userReadRepository);
+        $this->commandHandler = new ChangePasswordCommandHandler($this->userRepository);
         $this->user = Users::aUser();
     }
 

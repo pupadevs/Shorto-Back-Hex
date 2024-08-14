@@ -9,20 +9,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\TestCase;
 use Source\Shared\CQRS\Command\CommandBus;
 use Source\Shared\CQRS\Querys\QueryBus;
-use Source\User\App\Commands\ChangePasswordCommand;
-use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Querys\CheckPasswordQuery;
-use Source\User\App\Querys\FindUserByIdQuery;
-use Source\User\App\Services\ChangePasswordService;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\Password;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserEloquentModel;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\App\Commands\UserCommands\ChangePassword\ChangePasswordCommand;
+use Source\User\App\Querys\UserQuery\CheckPassword\CheckPasswordQuery;
+use Source\User\App\Querys\UserQuery\FindUser\FindUserByIdQuery;
+use Source\User\App\Services\User\ChangePassword\ChangePasswordService;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\Password;
 use Tests\Fixtures\Users;
 
 class ChangePasswordServiceTest extends TestCase{

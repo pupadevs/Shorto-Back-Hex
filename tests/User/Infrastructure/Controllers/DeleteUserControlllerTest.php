@@ -6,9 +6,9 @@ namespace Source\User\Infrastructure\Controllers;
 
 
 use Mockery;
-use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Services\DeleteUserService;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\App\Services\User\DeleteUser\DeleteUserService;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 use Tests\Traits\RefreshMultipleDatabases;
@@ -56,7 +56,7 @@ use Tests\Traits\RefreshMultipleDatabases;
     public function test_user_is_deleted_successfully()
     {
         $user = Users::aUser();
-        $userRepository = new UserRepositoryEloquentMySql();
+        $userRepository = new UserRepositoryDbFacades();
         $userRepository->save($user);
         event(new UserCreatedReadEvent($user));
         $response = $this->deleteJson('/api/delete/' . $user->getId()->toString());

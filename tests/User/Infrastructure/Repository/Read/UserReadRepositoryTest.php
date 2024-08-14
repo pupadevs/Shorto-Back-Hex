@@ -2,18 +2,18 @@
 
 namespace Source\User\Infrastructure\Repository\Read;
 
-use Source\User\Domain\ValueObjects\Password;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Events\User\ChangePasswordEvent\ChangePasswordReadEvent;
+use Source\User\Domain\Events\User\DeleteUserEvent\DeleteUserReadEvent;
+use Source\User\Domain\Events\User\UserCreatedEvent\UserCreatedReadEvent;
+use Source\User\Domain\Events\User\UserUpdatedEvent\UserUpdatedReadEvent;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\Password;
 use Tests\TestCase;
-use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Events\ChangePasswordReadEvent;
-use Source\User\Domain\Events\DeleteUserReadEvent;
-use Source\User\Domain\Events\UserUpdatedReadEvent;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\ValueObjects\UserID;
+use Source\User\Domain\ValueObjects\User\UserID;
 use Source\User\Infrastructure\Repository\Exception\EmailExistsException;
 use Source\User\Infrastructure\Repository\Exception\UserNotFoundException;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
 use Tests\Fixtures\Users;
 
 class UserReadRepositoryTest extends TestCase

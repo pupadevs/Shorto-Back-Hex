@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Source\User\App\Querys;
+namespace Tests\User\App\Querys;
+
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Source\User\App\Events\UserCreatedReadEvent;
-use Source\User\App\Querys\CheckPasswordQuery;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\Interfaces\UserReadRepositoryInterface;
-use Source\User\Domain\Interfaces\UserRepositoryInterface;
-use Source\User\Domain\ValueObjects\Password;
-use Source\User\Infrastructure\Repository\Read\UserReadRepository;
-use Source\User\Infrastructure\Repository\UserRepositoryEloquentMySql;
+use Source\User\App\Querys\UserQuery\CheckPassword\CheckPasswordQuery;
+use Source\User\App\Querys\UserQuery\CheckPassword\CheckPasswordQueryHandler;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserReadRepositoryInterface;
+use Source\User\Domain\Interfaces\UserRepositoryContracts\UserRepositoryInterface;
+use Source\User\Domain\ValueObjects\User\Password;
+use Source\User\Infrastructure\Repository\User\Read\UserReadRepository;
+use Source\User\Infrastructure\Repository\User\Write\UserRepositoryDbFacades;
 use Tests\Fixtures\Users;
 use Tests\TestCase;
 
@@ -31,7 +33,7 @@ class CheckPasswordQueryTest extends TestCase
         $this->userReadRepository = new UserReadRepository();
         $this->queryHandler = new CheckPasswordQueryHandler();
         $this->user = Users::aUser();
-        $this->userRepository = new UserRepositoryEloquentMySql();
+        $this->userRepository = new UserRepositoryDbFacades();
 
     }
 

@@ -6,10 +6,10 @@ namespace Tests\Fixtures;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Testing\Fakes\Fake;
-use Source\User\Domain\Entity\User;
-use Source\User\Domain\ValueObjects\Email;
-use Source\User\Domain\ValueObjects\Name;
-use Source\User\Domain\ValueObjects\Password;
+use Source\User\Domain\Entity\User\User;
+use Source\User\Domain\ValueObjects\User\Email;
+use Source\User\Domain\ValueObjects\User\Name;
+use Source\User\Domain\ValueObjects\User\Password;
 
 class Users
 {
